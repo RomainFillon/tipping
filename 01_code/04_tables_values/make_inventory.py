@@ -44,7 +44,7 @@ COUNTS = REPL / "02_output" / "values" / "counts.json"
 RUNALL = REPL / "run_all.sh"
 OUT = REPL / "README.md"
 
-BLOCKS = ("TITLE", "MAP", "COUNTS", "PROGRAMS", "MACROS", "UNUSED")
+BLOCKS = ("TITLE", "MAP", "COUNTS", "PROGRAMS", "MACROS")
 
 
 # ── the producer of every figure file, declared once and reconciled with run_all.sh ──
@@ -217,10 +217,6 @@ def main() -> None:
         used |= set(re.findall(r"\\([A-Za-z]+)", strip_comments((TABLES / t).read_text(encoding="utf-8"))))
     used |= set(figure_macros())
     unused = sorted(m for m in defined if m not in used)
-    un_by = {}
-    for m in unused:
-        full = computed[m]["source"] if m in computed else "inputs_literature.py (sourced constant)"
-        un_by.setdefault(producer(full), []).append(m)
 
     # ── the counts of the data availability statement, from counts.json ──
     if not COUNTS.exists():
@@ -255,13 +251,6 @@ def main() -> None:
     blocks["PROGRAMS"] = table([(f"`01_code/{p}`", SCRIPTS[p], data_for(p)) for p in sorted(SCRIPTS)],
                                ["Script", "Role", "Needs"])
     blocks["MACROS"] = table(mac_rows, ["Produced by", "Macros", "of which [requires network]", "Needs"])
-    blocks["UNUSED"] = (
-        f"`values.tex` defines {len(defined)} macros; {len(defined) - len(unused)} are used by `paper.tex`, "
-        f"the table files it inputs or the figures, and **{len(unused)} are not**. These are diagnostics: "
-        "intermediate results and checks that the scripts compute on the way to the reported numbers, kept "
-        "so that each can be inspected next to its provenance. By producing script:\n\n"
-        + table([(f"`01_code/{p}`", str(len(ms))) for p, ms in sorted(un_by.items())],
-                ["Produced by", "Macros not used by the paper"]))
 
     readme = OUT.read_text(encoding="utf-8")
     for key in BLOCKS:

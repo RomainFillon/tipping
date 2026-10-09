@@ -236,7 +236,7 @@ The outputs under `02_output/` are the same in both modes.
 | `01_code/03_figures/` | The five figures |
 | `01_code/04_tables_values/` | `computed.json`, `values.tex`, the table files, the paper manifest, this README's generated sections |
 | `01_code/05_record_study/` | The record-detectability study |
-| `02_output/` | Everything the run writes, including the inputs of the manuscript (`values/values_generated.tex`, `tables/`, the five figures in `figures/`) and `paper_manifest.json`; see the notes on what is versioned |
+| `02_output/` | Everything the run writes, including the inputs of the manuscript (`values/values_generated.tex`, `tables/`, the five figures in `figures/`) and `paper_manifest.json` |
 
 ### Every script
 
@@ -365,37 +365,6 @@ Every random draw is seeded, so a rerun returns the same numbers:
   cell carries its own seed, so the results do not depend on the number of processes.
 - No other script draws random numbers (the solvers, `ews_calibration.py` and the figures are
   deterministic).
-
-### Macros emitted but not used by the paper
-
-<!-- BEGIN GENERATED UNUSED -->
-`values.tex` defines 242 macros; 137 are used by `paper.tex`, the table files it inputs or the figures, and **105 are not**. These are diagnostics: intermediate results and checks that the scripts compute on the way to the reported numbers, kept so that each can be inspected next to its provenance. By producing script:
-
-| Produced by | Macros not used by the paper |
-|---|---|
-| `01_code/01_calibration/bhp_bound.py` | 8 |
-| `01_code/01_calibration/eps_inf_ci.py` | 1 |
-| `01_code/01_calibration/ews_calibration.py` | 2 |
-| `01_code/01_calibration/record_detectability.py` | 41 |
-| `01_code/01_calibration/reduced_form_scc.py` | 2 |
-| `01_code/02_solvers/moving_budget.py` | 4 |
-| `01_code/02_solvers/noise_reversal_frontier.py` | 2 |
-| `01_code/02_solvers/validation_bvp.py` | 13 |
-| `01_code/03_figures/fig_forest_tc.py` | 8 |
-| `01_code/04_tables_values/collect_computed.py` | 12 |
-| `01_code/inputs_literature.py` | 12 |
-<!-- END GENERATED UNUSED -->
-
-### Generated outputs are versioned
-
-The inputs of the manuscript are committed: `02_output/values/values_generated.tex` (the
-manuscript's `values.tex`), `02_output/tables/disagreements.tex`, `02_output/tables/eps_dyn.tex`
-and the five figures of the paper in `02_output/figures/`. So are `02_output/computed.json`,
-`02_output/values/counts.json`, `02_output/values/VALUES_DIFF.md` and
-`02_output/paper_manifest.json`, which record the state the paper was compiled from. A run
-overwrites all of them; `git diff` then shows what changed. The other outputs (the other files
-in `02_output/figures/`, `02_output/record_study/`, the captured outputs in
-`02_output/values/raw_runs/`) are not versioned.
 
 ---
 

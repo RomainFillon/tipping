@@ -261,7 +261,7 @@ def macros_in_use():
     figure script's FIGURE_MACROS names it. LaTeX comments do not count."""
     if not MANU.is_dir():
         raise SystemExit("[ERROR] --list-unused reads manuscript/paper.tex, and manuscript/ is not "
-                         "present. README.md section 5 lists the unused macros of the last full run.")
+                         "present.")
     used = set(figure_macros())
     for f in [MANU / "paper.tex"] + sorted((MANU / "tables").glob("*.tex")):
         txt = "\n".join(re.sub(r"(?<!\\)%.*$", "", l)
