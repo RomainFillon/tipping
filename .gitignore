@@ -1,0 +1,23 @@
+# LaTeX build artifacts
+*.aux
+*.log
+*.out
+*.brf
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+__pycache__/
+*.pyc
+manuscript/paper.pdf
+manuscript/*.bbl
+
+# RCMIP v5.1.0 emissions file (48 MB): not shipped; the extract next to it is.
+00_data/emissions/rcmip-emissions-annual-means-v5-1-0.csv
+
+# AMOC SST index of Caesar et al. 2018 (PIK): no licence published, so not redistributed.
+# 00_data/amoc/fetch_pik_sg_index.py downloads it once; ews_calibration.py checks its md5.
+00_data/amoc/sg_index_hadisst.txt
+
+# The Python environment of README section 4 (python3 -m venv .venv).
+.venv/
+venv/

@@ -1,0 +1,13 @@
+# Replication package -- the four direct Python dependencies, at the exact versions used to
+# produce the figures and values of the manuscript.
+#
+# Python 3.14.3. To reproduce the outputs, install the complete environment instead:
+#     python3 -m pip install -r requirements-lock.txt      (at the package root)
+# which pins these four and everything they depend on.
+#
+# Random seeds: see the "Notes" section of README.md.
+
+numpy==2.4.4
+scipy==1.17.1
+matplotlib==3.10.8
+pandas==3.0.1

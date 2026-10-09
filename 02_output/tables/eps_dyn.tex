@@ -1,0 +1,16 @@
+% GENERATED FILE — produced by make_tables_values.py (write_eps_dyn). Every number is a
+% macro of values.tex; an F cell is --- where eps_dyn >= eps_now (computed.json).
+\begin{tabular}{@{}llccccccc@{}}
+\toprule
+ & & & \multicolumn{2}{c}{Today's rate} & \multicolumn{2}{c}{SSP2-4.5} & \multicolumn{2}{c}{SSP3-7.0} \\
+\cmidrule(lr){4-5}\cmidrule(lr){6-7}\cmidrule(l){8-9}
+Element & Recovery rate $\theta$ (per year) & $\eps_{\mathrm{now}}$ & $\eps_{\mathrm{dyn}}$ & $F$ & $\eps_{\mathrm{dyn}}$ & $F$ & $\eps_{\mathrm{dyn}}$ & $F$ \\
+\midrule
+AMOC & $\thetaAMOChat$, record & $\epsAMOCnat$ & $\epsDynAMOC$ & $\ampAMOC$ & $\epsDynAMOCSSPmid$ & $\ampAMOCSSPmid$ & $\epsDynAMOCSSPhigh$ & $\ampAMOCSSPhigh$ \\
+Amazon & $\kappaAmazonBoulton$, vegetation index & $\epsAmazonnat$ & $\epsDynAmazonBoulton$ & $\ampAmazonBoulton$ & $\epsDynAmazonBoultonSSPmid$ & $\ampAmazonBoultonSSPmid$ & $\epsDynAmazonBoultonSSPhigh$ & $\ampAmazonBoultonSSPhigh$ \\
+Amazon & one per century, assumed & $\epsAmazonnat$ & $\epsDynAmazonSlow$ & $\ampAmazonSlow$ & $\epsDynAmazonSlowSSPmid$ & $\ampAmazonSlowSSPmid$ & $\epsDynAmazonSlowSSPhigh$ & --- \\
+West Antarctic ice sheet & $1/\relaxWAISHillLo$, flow & $\epsWAISnat$ & $\epsDynWAISfast$ & $\ampWAISfast$ & $\epsDynWAISfastSSPmid$ & $\ampWAISfastSSPmid$ & $\epsDynWAISfastSSPhigh$ & $\ampWAISfastSSPhigh$ \\
+West Antarctic ice sheet & $1/\relaxWAISHillHi$, flow & $\epsWAISnat$ & $\epsDynWAISslow$ & --- & $\epsDynWAISslowSSPmid$ & --- & $\epsDynWAISslowSSPhigh$ & --- \\
+West Antarctic ice sheet & one per century, slower modes & $\epsWAISnat$ & $\epsDynWAIScentury$ & --- & $\epsDynWAIScenturySSPmid$ & --- & $\epsDynWAIScenturySSPhigh$ & --- \\
+\bottomrule
+\end{tabular}

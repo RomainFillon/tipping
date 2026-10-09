@@ -1,0 +1,180 @@
+{
+ "regions": [
+  {
+   "key": "B_1871-2016_lineaire_10",
+   "centre": [
+    -0.007196305891731209,
+    -0.0017788189119773824
+   ],
+   "S": [
+    [
+     1.7503487219377204e-05,
+     1.5419770951920247e-05
+    ],
+    [
+     1.5419770951920247e-05,
+     1.8536365322789123e-05
+    ]
+   ],
+   "q": 10.335121406108582,
+   "s_lo": -0.0014832178401447205,
+   "s_hi": 0.010604812121162203,
+   "s_star": 0.004560797140508742,
+   "s_uncond": -0.0017788189119773824,
+   "axis_cut": true
+  },
+  {
+   "key": "A_1871-2016_lineaire_40",
+   "centre": [
+    -0.0075599412382504165,
+    -0.0018915301425063123
+   ],
+   "S": [
+    [
+     3.258604261358539e-05,
+     2.3957610756723467e-05
+    ],
+    [
+     2.3957610756723467e-05,
+     2.436468995728924e-05
+    ]
+   ],
+   "q": 6.59704128344383,
+   "s_lo": -0.002051337835414152,
+   "s_hi": 0.009384578580106549,
+   "s_star": 0.003666620372346199,
+   "s_uncond": -0.0018915301425063123,
+   "axis_cut": true
+  }
+ ],
+ "slope_82": 0.008299823573918438,
+ "crit": {
+  "stat_PLI_const": 2.3967559284271016,
+  "stat_TRANS_const": 2.4793402475592594,
+  "stat_PLI_libre": 1.7887595150678852,
+  "stat_TRANS_libre": 1.836672426734315
+ },
+ "cells": [
+  {
+   "label": "B:s_lo",
+   "slope": -0.0014832178401447205,
+   "reject": {
+    "stat_PLI_const": 0.015,
+    "stat_TRANS_const": 0.01375,
+    "stat_PLI_libre": 0.05875,
+    "stat_TRANS_libre": 0.0625
+   },
+   "n": 800
+  },
+  {
+   "label": "B:s_star",
+   "slope": 0.004560797140508742,
+   "reject": {
+    "stat_PLI_const": 0.395,
+    "stat_TRANS_const": 0.3975,
+    "stat_PLI_libre": 0.04875,
+    "stat_TRANS_libre": 0.045
+   },
+   "n": 800
+  },
+  {
+   "label": "B:s_uncond",
+   "slope": -0.0017788189119773824,
+   "reject": {
+    "stat_PLI_const": 0.02125,
+    "stat_TRANS_const": 0.02125,
+    "stat_PLI_libre": 0.05,
+    "stat_TRANS_libre": 0.05
+   },
+   "n": 800
+  },
+  {
+   "label": "B:s_hi",
+   "slope": 0.010604812121162203,
+   "reject": {
+    "stat_PLI_const": 0.945,
+    "stat_TRANS_const": 0.95,
+    "stat_PLI_libre": 0.0425,
+    "stat_TRANS_libre": 0.04125
+   },
+   "n": 800
+  },
+  {
+   "label": "A:s_lo",
+   "slope": -0.002051337835414152,
+   "reject": {
+    "stat_PLI_const": 0.01625,
+    "stat_TRANS_const": 0.015,
+    "stat_PLI_libre": 0.0475,
+    "stat_TRANS_libre": 0.0475
+   },
+   "n": 800
+  },
+  {
+   "label": "A:s_star",
+   "slope": 0.003666620372346199,
+   "reject": {
+    "stat_PLI_const": 0.27875,
+    "stat_TRANS_const": 0.2875,
+    "stat_PLI_libre": 0.0475,
+    "stat_TRANS_libre": 0.04625
+   },
+   "n": 800
+  },
+  {
+   "label": "A:s_uncond",
+   "slope": -0.0018915301425063123,
+   "reject": {
+    "stat_PLI_const": 0.01125,
+    "stat_TRANS_const": 0.01125,
+    "stat_PLI_libre": 0.05875,
+    "stat_TRANS_libre": 0.06125
+   },
+   "n": 800
+  },
+  {
+   "label": "A:s_hi",
+   "slope": 0.009384578580106549,
+   "reject": {
+    "stat_PLI_const": 0.8675,
+    "stat_TRANS_const": 0.8775,
+    "stat_PLI_libre": 0.04875,
+    "stat_TRANS_libre": 0.05375
+   },
+   "n": 800
+  },
+  {
+   "label": "zero",
+   "slope": 0.0,
+   "reject": {
+    "stat_PLI_const": 0.0575,
+    "stat_TRANS_const": 0.05875,
+    "stat_PLI_libre": 0.06125,
+    "stat_TRANS_libre": 0.06125
+   },
+   "n": 800
+  },
+  {
+   "label": "nul82-exponentiel",
+   "slope": 0.008299823573918438,
+   "reject": {
+    "stat_PLI_const": 0.795,
+    "stat_TRANS_const": 0.79375,
+    "stat_PLI_libre": 0.045,
+    "stat_TRANS_libre": 0.05625
+   },
+   "n": 800
+  },
+  {
+   "label": "nul82-forme-exacte",
+   "slope": 0.008299823573918438,
+   "reject": {
+    "stat_PLI_const": 0.8225,
+    "stat_TRANS_const": 0.8025,
+    "stat_PLI_libre": 0.08625,
+    "stat_TRANS_libre": 0.05625
+   },
+   "n": 800
+  }
+ ]
+}

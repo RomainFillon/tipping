@@ -1,0 +1,8 @@
+{
+  "literature": 43,
+  "computed": 199,
+  "computed_network": 36,
+  "total": 242,
+  "computed_json_entries": 238,
+  "note": "counts of manuscript/values.tex as written by make_tables_values.py. 'computed_json_entries' is the larger number in computed.json, which includes macros listed in REMOVED_MACROS that are never emitted."
+}

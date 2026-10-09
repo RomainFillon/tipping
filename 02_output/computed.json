@@ -1,0 +1,1348 @@
+{
+  "MstarAMOCmed": {
+    "value": "9433",
+    "source": "calibration_ci.py — M*_P50 (MC seed=42)",
+    "requires_network": false
+  },
+  "OmegaAMOCmed": {
+    "value": "0.52",
+    "source": "calibration_ci.py — Omega(rho H) median, the realization factor",
+    "requires_network": false
+  },
+  "MstarAmazonmed": {
+    "value": "7998",
+    "source": "calibration_ci.py — M*_P50 (MC seed=42)",
+    "requires_network": false
+  },
+  "OmegaAmazonmed": {
+    "value": "0.32",
+    "source": "calibration_ci.py — Omega(rho H) median, the realization factor",
+    "requires_network": false
+  },
+  "MstarWAISmed": {
+    "value": "3895",
+    "source": "calibration_ci.py — M*_P50 (MC seed=42)",
+    "requires_network": false
+  },
+  "OmegaWAISmed": {
+    "value": "0.017",
+    "source": "calibration_ci.py — Omega(rho H) median, the realization factor",
+    "requires_network": false
+  },
+  "TCREdiscardPct": {
+    "value": "0.9",
+    "source": "calibration_ci.py — tcre_draw.draw_tcre, share of the normal draws <= 0 discarded by rejection, % of all draws made (seed=42)",
+    "requires_network": false
+  },
+  "AMOCrecordFirstYear": {
+    "value": "1871",
+    "source": "ews_calibration.py — first year of the series, read from the header of 00_data/amoc/sg_index_hadisst.txt",
+    "requires_network": true
+  },
+  "AMOCrecordLastYear": {
+    "value": "2016",
+    "source": "ews_calibration.py — last year of the series, read from the header of 00_data/amoc/sg_index_hadisst.txt",
+    "requires_network": true
+  },
+  "VarAMOChat": {
+    "value": "0.088",
+    "source": "ews_calibration.py — detrended variance (HadISST)",
+    "requires_network": true
+  },
+  "thetaAMOChat": {
+    "value": "0.79",
+    "source": "ews_calibration.py — AR(1) restoring rate",
+    "requires_network": true
+  },
+  "sigmaAMOChat": {
+    "value": "0.372",
+    "source": "ews_calibration.py — sigma_clim detrended",
+    "requires_network": true
+  },
+  "HadISSTyears": {
+    "value": "146",
+    "source": "HadISST record length (Caesar 2018)",
+    "requires_network": true
+  },
+  "sigmaAggregationFactor": {
+    "value": "1.43",
+    "source": "closed form: sigma-hat (annual-mean inversion) / sigma-hat (point-sample reading) = sqrt((lambda/-ln AC1) x Var(X_t)/Var(annual means)), lambda=0.7928, -ln AC1=0.4933, variance ratio=1.2808 (ews_calibration.py)",
+    "requires_network": true
+  },
+  "kappaAMOC": {
+    "value": "0.076",
+    "source": "closed form: 2 rho / lambda, rho=0.03 (rhoBase), lambda=0.7928 (ews_calibration.py)",
+    "requires_network": true
+  },
+  "sigmaAggregationFactorTheta": {
+    "value": "1.27",
+    "source": "closed form: the same factor through the recovery rate alone, sqrt(lambda/-ln AC1), lambda=0.7928, -ln AC1=0.4933 (ews_calibration.py)",
+    "requires_network": true
+  },
+  "sigmaAMOCPten": {
+    "value": "0.26",
+    "source": "closed form: lognormal(median=0.3725, cv=0.3) percentiles [prior CV on AMOC sigma (= sigmaPriorPct), for P10/P90]",
+    "requires_network": true
+  },
+  "sigmaAMOCPninety": {
+    "value": "0.54",
+    "source": "closed form: lognormal(median=0.3725, cv=0.3) percentiles [prior CV on AMOC sigma (= sigmaPriorPct), for P10/P90]",
+    "requires_network": true
+  },
+  "DTzero": {
+    "value": "1.2",
+    "source": "Forster et al. 2024, Indicators of Global Climate Change 2023, ESSD 16:2625-2658 — observed warming above pre-industrial, 2014-2023 average, 1.19 [1.06 to 1.30] (°C)",
+    "requires_network": false
+  },
+  "epsAMOCnat": {
+    "value": "0.70",
+    "source": "closed form: (DT*-1.2)/DT*, DT*=4 (AM2022), DT_cur=1.2 (AR6)",
+    "requires_network": false
+  },
+  "epsAmazonnat": {
+    "value": "0.66",
+    "source": "closed form: (DT*-1.2)/DT*, DT*=3.5 (AM2022), DT_cur=1.2 (AR6)",
+    "requires_network": false
+  },
+  "epsWAISnat": {
+    "value": "0.20",
+    "source": "closed form: (DT*-1.2)/DT*, DT*=1.5 (AM2022), DT_cur=1.2 (AR6)",
+    "requires_network": false
+  },
+  "kappaAmazonBoulton": {
+    "value": "9.68",
+    "source": "closed form: 12 / (1/kappa in months), 1/kappa=1.24 months [Boulton, Lenton and Boers 2022, Nature Climate Change 12:271-278, Methods p. 9 — 1/kappa of the VOD vegetation index, regional mean AR(1), months]; per year",
+    "requires_network": false
+  },
+  "epsDynAMOC": {
+    "value": "0.027",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=9433 GtCO2 (calibration_ci.py), theta=0.7928/yr measured on the record (ews_calibration.py), eps_now=0.7; theta declines as sqrt(eps) along the descent",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ampAMOC": {
+    "value": "5.1",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=9433 GtCO2 (calibration_ci.py), theta=0.7928/yr measured on the record (ews_calibration.py), eps_now=0.7; theta declines as sqrt(eps) along the descent",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "epsDynAMOCSSPmid": {
+    "value": "0.029",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=9433 GtCO2 (calibration_ci.py), theta=0.7928/yr measured on the record (ews_calibration.py), eps_now=0.7; theta declines as sqrt(eps) along the descent",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ampAMOCSSPmid": {
+    "value": "4.9",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=9433 GtCO2 (calibration_ci.py), theta=0.7928/yr measured on the record (ews_calibration.py), eps_now=0.7; theta declines as sqrt(eps) along the descent",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "epsDynAMOCSSPhigh": {
+    "value": "0.044",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=82.7 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=9433 GtCO2 (calibration_ci.py), theta=0.7928/yr measured on the record (ews_calibration.py), eps_now=0.7; theta declines as sqrt(eps) along the descent",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ampAMOCSSPhigh": {
+    "value": "4.0",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=82.7 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=9433 GtCO2 (calibration_ci.py), theta=0.7928/yr measured on the record (ews_calibration.py), eps_now=0.7; theta declines as sqrt(eps) along the descent",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "epsDynAmazonBoulton": {
+    "value": "0.0056",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=7998 GtCO2 (calibration_ci.py), theta=9.677/yr, the vegetation-index time scale of Boulton et al. 2022, eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampAmazonBoulton": {
+    "value": "10.8",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=7998 GtCO2 (calibration_ci.py), theta=9.677/yr, the vegetation-index time scale of Boulton et al. 2022, eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynAmazonBoultonSSPmid": {
+    "value": "0.0060",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=7998 GtCO2 (calibration_ci.py), theta=9.677/yr, the vegetation-index time scale of Boulton et al. 2022, eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampAmazonBoultonSSPmid": {
+    "value": "10.5",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=7998 GtCO2 (calibration_ci.py), theta=9.677/yr, the vegetation-index time scale of Boulton et al. 2022, eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynAmazonBoultonSSPhigh": {
+    "value": "0.0091",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=82.7 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=7998 GtCO2 (calibration_ci.py), theta=9.677/yr, the vegetation-index time scale of Boulton et al. 2022, eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampAmazonBoultonSSPhigh": {
+    "value": "8.5",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=82.7 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=7998 GtCO2 (calibration_ci.py), theta=9.677/yr, the vegetation-index time scale of Boulton et al. 2022, eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynAmazonSlow": {
+    "value": "0.55",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=7998 GtCO2 (calibration_ci.py), theta=1/100/yr, assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampAmazonSlow": {
+    "value": "1.1",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=7998 GtCO2 (calibration_ci.py), theta=1/100/yr, assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynAmazonSlowSSPmid": {
+    "value": "0.59",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=7998 GtCO2 (calibration_ci.py), theta=1/100/yr, assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampAmazonSlowSSPmid": {
+    "value": "1.1",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=7998 GtCO2 (calibration_ci.py), theta=1/100/yr, assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynAmazonSlowSSPhigh": {
+    "value": "0.89",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=82.7 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=7998 GtCO2 (calibration_ci.py), theta=1/100/yr, assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampAmazonSlowSSPhigh": {
+    "value": "1.0",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=82.7 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=7998 GtCO2 (calibration_ci.py), theta=1/100/yr, assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.66; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynWAISfast": {
+    "value": "0.13",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=3895 GtCO2 (calibration_ci.py), theta=1/10/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillLo), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampWAISfast": {
+    "value": "1.2",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=3895 GtCO2 (calibration_ci.py), theta=1/10/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillLo), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynWAISfastSSPmid": {
+    "value": "0.14",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/10/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillLo), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampWAISfastSSPmid": {
+    "value": "1.2",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/10/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillLo), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynWAISfastSSPhigh": {
+    "value": "0.17",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=59.8 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/10/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillLo), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampWAISfastSSPhigh": {
+    "value": "1.1",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=59.8 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/10/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillLo), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynWAISslow": {
+    "value": "0.20",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=3895 GtCO2 (calibration_ci.py), theta=1/20/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillHi), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampWAISslow": {
+    "value": "1.0",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=3895 GtCO2 (calibration_ci.py), theta=1/20/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillHi), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynWAISslowSSPmid": {
+    "value": "0.22",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/20/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillHi), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampWAISslowSSPmid": {
+    "value": "1.0",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/20/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillHi), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynWAISslowSSPhigh": {
+    "value": "0.27",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=59.8 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/20/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillHi), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampWAISslowSSPhigh": {
+    "value": "1.0",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=59.8 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/20/yr, flux relaxation, Hill et al. 2023 (relaxWAISHillHi), eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynWAIScentury": {
+    "value": "0.60",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=3895 GtCO2 (calibration_ci.py), theta=1/100/yr, slower modes (Robel et al. 2018), assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampWAIScentury": {
+    "value": "1.0",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=40 GtCO2/yr (E_0), M*=3895 GtCO2 (calibration_ci.py), theta=1/100/yr, slower modes (Robel et al. 2018), assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynWAIScenturySSPmid": {
+    "value": "0.64",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/100/yr, slower modes (Robel et al. 2018), assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampWAIScenturySSPmid": {
+    "value": "1.0",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=44.3 GtCO2/yr (SSP2-4.5, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/100/yr, slower modes (Robel et al. 2018), assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "epsDynWAIScenturySSPhigh": {
+    "value": "0.78",
+    "source": "closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=59.8 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/100/yr, slower modes (Robel et al. 2018), assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "ampWAIScenturySSPhigh": {
+    "value": "1.0",
+    "source": "closed form: F = (eps_now/eps_dyn)^(1/2) if eps_dyn < eps_now, else 1; the factor by which the leading law lifts the price between today's proximity and eps_dyn, the width of the window (the lift of the full price only if the state is inside the noise layer today); closed form, self-consistent: ((E/(M* theta)) sqrt(eps_now))^(2/3), E=59.8 GtCO2/yr (SSP3-7.0, highest rate before the median date, fig_forest_tc.py), M*=3895 GtCO2 (calibration_ci.py), theta=1/100/yr, slower modes (Robel et al. 2018), assumption [sensitivity assumption, not a measurement: a recovery time of one century (yr)], eps_now=0.2; theta declines as sqrt(eps) along the descent",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "classFactorAtEpsDynAMOC": {
+    "value": "6.1",
+    "source": "closed form: eps_dyn^(-1/2) for the AMOC at E_0, eps_dyn=0.0272; the class factor tied at eps = 1, as \\xoverClassFactorAtCentral",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "epsAdditivity": {
+    "value": "0.14",
+    "source": "closed form: E_0/(rho M*), E_0=40 GtCO2/yr, rho=0.03, M*=9433 GtCO2 pre-industrial to threshold (calibration_ci.py); M* is NOT the remaining budget eps_now M*",
+    "requires_network": true
+  },
+  "additivityErrAMOC": {
+    "value": "20",
+    "source": "closed form: E_0/(rho M* eps_now) x 100, the propagation lemma's relative error at current proximity; E_0=40 GtCO2/yr, rho=0.03, M*=9433 GtCO2, eps_now=0.70; WAIS is 171%, above one, so it carries no macro",
+    "requires_network": true
+  },
+  "additivityErrAmazon": {
+    "value": "25",
+    "source": "closed form: E_0/(rho M* eps_now) x 100, the propagation lemma's relative error at current proximity; E_0=40 GtCO2/yr, rho=0.03, M*=7998 GtCO2, eps_now=0.66; WAIS is 171%, above one, so it carries no macro",
+    "requires_network": true
+  },
+  "rhoRangeLoPct": {
+    "value": "1",
+    "source": "the Nordhaus-Stern range of the discount rate over which the \\priceRatioDiscount* ratios are taken, low end (%)",
+    "requires_network": false
+  },
+  "rhoRangeHiPct": {
+    "value": "5",
+    "source": "the Nordhaus-Stern range of the discount rate over which the \\priceRatioDiscount* ratios are taken, high end (%)",
+    "requires_network": false
+  },
+  "phiRatioDiscountRange": {
+    "value": "4.7",
+    "source": "closed form: Phi_fold(rho/sigma^(2/3)) at rho=5% over rho=1%, sigma=0.3725 (ews_calibration.py). The AMPLITUDE ratio, not the price",
+    "requires_network": true
+  },
+  "priceRatioDiscountAMOC": {
+    "value": "2.20",
+    "source": "closed form: A(rho=5%)/A(rho=1%) with A ~ f(rho T) Phi_fold, T=50 yr (Armstrong McKay et al. 2022, Science — Table 1 central), sigma=0.3725; the two channels of impatience net out here",
+    "requires_network": true
+  },
+  "priceRatioDiscountAmazon": {
+    "value": "1.48",
+    "source": "closed form: A(rho=5%)/A(rho=1%) with A ~ f(rho T) Phi_fold, T=100 yr (Armstrong McKay et al. 2022, Science — Table 1 central), sigma=0.3725; the two channels of impatience net out here",
+    "requires_network": true
+  },
+  "priceRatioDiscountWAIS": {
+    "value": "0.95",
+    "source": "closed form: A(rho=5%)/A(rho=1%) with A ~ f(rho T) Phi_fold, T=2000 yr (Armstrong McKay et al. 2022, Science — Table 1 central), sigma=0.3725; the two channels of impatience net out here",
+    "requires_network": true
+  },
+  "tcAMOCcentral": {
+    "value": "156",
+    "source": "closed form: (DT*-DT_0)/TCRE x 1000 / E_0 at central inputs, DT*=4, DT_0=1.2, TCRE=0.45, E_0=40",
+    "requires_network": false
+  },
+  "xoverClassFactorAtCentral": {
+    "value": "1.20",
+    "source": "closed form: eps_now^(-1/2) at the central AMOC threshold, eps_now=(DT*-DT_0)/DT*, DT*=4, DT_0=1.2; the class factor tied at eps=1, as in crossover.py",
+    "requires_network": false
+  },
+  "tcAMOC": {
+    "value": "164",
+    "source": "eps_inf_ci.py — deadline bound t_c <= (M*/E0) eps_0 = mu_now/E0 (median calibration, seed=42); free of the backstop cost and of the margin",
+    "requires_network": false
+  },
+  "tcAmazon": {
+    "value": "131",
+    "source": "eps_inf_ci.py — deadline bound t_c <= (M*/E0) eps_0 = mu_now/E0 (median calibration, seed=42); free of the backstop cost and of the margin",
+    "requires_network": false
+  },
+  "tcWAIS": {
+    "value": "27",
+    "source": "eps_inf_ci.py — deadline bound t_c <= (M*/E0) eps_0 = mu_now/E0 (median calibration, seed=42); free of the backstop cost and of the margin",
+    "requires_network": false
+  },
+  "sccReducedCoefAMOC": {
+    "value": "0.033",
+    "source": "reduced_form_scc.py — the reduced-form price at the median damage prior (lambda, Var from ews_calibration.py)",
+    "requires_network": true
+  },
+  "sdAMOCrecord": {
+    "value": "0.30",
+    "source": "reduced_form_scc.py — the reduced-form price at the median damage prior (lambda, Var from ews_calibration.py)",
+    "requires_network": true
+  },
+  "dphysBreakevenPub": {
+    "value": "27.58",
+    "source": "reduced_form_scc.py — the reduced-form price at the median damage prior (lambda, Var from ews_calibration.py)",
+    "requires_network": true
+  },
+  "dphysValidityMax": {
+    "value": "1.19",
+    "source": "reduced_form_scc.py — the reduced-form price at the median damage prior (lambda, Var from ews_calibration.py)",
+    "requires_network": true
+  },
+  "reducedExponentAnchor": {
+    "value": "1.32",
+    "source": "reduced_form_scc.py — the reduced-form price at the median damage prior (lambda, Var from ews_calibration.py)",
+    "requires_network": true
+  },
+  "dphysSdRatioLambda": {
+    "value": "2.67",
+    "source": "reduced_form_scc.py — the reduced-form price at the median damage prior (lambda, Var from ews_calibration.py)",
+    "requires_network": true
+  },
+  "fracWAISfirst": {
+    "value": "90",
+    "source": "fig_forest_tc.py — share of draws in which the t_c ordering holds (seed=42, c_bar=100); the marginal P10/P90 cannot answer this",
+    "requires_network": false
+  },
+  "fracAmazonBeforeAMOC": {
+    "value": "59",
+    "source": "fig_forest_tc.py — share of draws in which the t_c ordering holds (seed=42, c_bar=100); the marginal P10/P90 cannot answer this",
+    "requires_network": false
+  },
+  "fracFullOrder": {
+    "value": "55",
+    "source": "fig_forest_tc.py — share of draws in which the t_c ordering holds (seed=42, c_bar=100); the marginal P10/P90 cannot answer this",
+    "requires_network": false
+  },
+  "fracWAISalreadyPct": {
+    "value": "25.2",
+    "source": "fig_forest_tc.py — % of WAIS draws with DT* below present warming, i.e. mu_now = 0 and the deadline already passed (seed=42); these are excluded from the ordering sample",
+    "requires_network": false
+  },
+  "fracWAISfirstIncl": {
+    "value": "91.5",
+    "source": "fig_forest_tc.py — CONTROL on the exclusion: share in which WAIS leads when the already-crossed draws are entered at t_c = 0 instead of being excluded (seed=42)",
+    "requires_network": false
+  },
+  "fracWAISbeforeAmazon": {
+    "value": "95",
+    "source": "fig_forest_tc.py — share of the draws with both bounds finite (t_c > 0) in which the ice sheet's bound is no later than the Amazon's (seed=42)",
+    "requires_network": false
+  },
+  "fracWAISbeforeAmazonIncl": {
+    "value": "96.4",
+    "source": "fig_forest_tc.py — CONTROL on the exclusion: the same share with the already-crossed draws entered at t_c = 0 (seed=42)",
+    "requires_network": false
+  },
+  "jointSamplePct": {
+    "value": "73.7",
+    "source": "fig_forest_tc.py — % of the N draws in which all three elements are still un-crossed, the sample the ordering shares are computed on (seed=42)",
+    "requires_network": false
+  },
+  "tcAMOCPten": {
+    "value": "47",
+    "source": "fig_forest_tc.py — P10 of the deadline bound mu_now/E0 over the draws with t_c > 0, the left end of the fig:forest_tc bar (seed=42); same sample as the median, no floor",
+    "requires_network": false
+  },
+  "tcAmazonPten": {
+    "value": "54",
+    "source": "fig_forest_tc.py — P10 of the deadline bound mu_now/E0 over the draws with t_c > 0, the left end of the fig:forest_tc bar (seed=42); same sample as the median, no floor",
+    "requires_network": false
+  },
+  "tcWAISPten": {
+    "value": "5",
+    "source": "fig_forest_tc.py — P10 of the deadline bound mu_now/E0 over the draws with t_c > 0, the left end of the fig:forest_tc bar (seed=42); same sample as the median, no floor",
+    "requires_network": false
+  },
+  "emissionPathStartYear": {
+    "value": "2024",
+    "source": "fig_forest_tc.py via emission_paths.py — T0, the year the emission paths start from; 2024, the start year the paper adopts (E_0 and DT_0 carry no year of their own)",
+    "requires_network": false
+  },
+  "emissionPathLastYear": {
+    "value": "2500",
+    "source": "fig_forest_tc.py via emission_paths.py — last year of the emission paths; both are zero from 2250, so not reached by then is not reached at all; RCMIP v5.1.0 (Zenodo 4589756), Emissions|CO2, World, with the extensions of Meinshausen et al. 2020; extract in 00_data/emissions/",
+    "requires_network": false
+  },
+  "EglobalRateSSPmid": {
+    "value": "41.8",
+    "source": "fig_forest_tc.py via emission_paths.py — SSP2-4.5 CO2 emissions in T0, GtCO2/yr, linear between the reported years; RCMIP v5.1.0 (Zenodo 4589756), Emissions|CO2, World, with the extensions of Meinshausen et al. 2020; extract in 00_data/emissions/",
+    "requires_network": false
+  },
+  "EglobalRateSSPhigh": {
+    "value": "48.0",
+    "source": "fig_forest_tc.py via emission_paths.py — SSP3-7.0 CO2 emissions in T0, GtCO2/yr, linear between the reported years; RCMIP v5.1.0 (Zenodo 4589756), Emissions|CO2, World, with the extensions of Meinshausen et al. 2020; extract in 00_data/emissions/",
+    "requires_network": false
+  },
+  "emissionPathSSPmidZeroYear": {
+    "value": "2250",
+    "source": "fig_forest_tc.py via emission_paths.py — first year from which SSP2-4.5 CO2 emissions stay at zero in its published extension (Meinshausen et al. 2020); RCMIP v5.1.0 (Zenodo 4589756), Emissions|CO2, World, with the extensions of Meinshausen et al. 2020; extract in 00_data/emissions/",
+    "requires_network": false
+  },
+  "tcAMOCSSPmidPten": {
+    "value": "44",
+    "source": "fig_forest_tc.py — P10 of the deadline bound on SSP2-4.5: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcAMOC (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcAMOCSSPmidNotReachedPct": {
+    "value": "75.0",
+    "source": "fig_forest_tc.py — % of the draws with t_c > 0 that SSP2-4.5 never brings to mu_now before \\emissionPathLastYear (seed=42)",
+    "requires_network": false
+  },
+  "tcAMOCSSPhigh": {
+    "value": "95",
+    "source": "fig_forest_tc.py — median of the deadline bound on SSP3-7.0: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcAMOC (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcAMOCSSPhighPten": {
+    "value": "33",
+    "source": "fig_forest_tc.py — P10 of the deadline bound on SSP3-7.0: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcAMOC (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcAMOCSSPhighNotReachedPct": {
+    "value": "26.8",
+    "source": "fig_forest_tc.py — % of the draws with t_c > 0 that SSP3-7.0 never brings to mu_now before \\emissionPathLastYear (seed=42)",
+    "requires_network": false
+  },
+  "tcAmazonSSPmidPten": {
+    "value": "53",
+    "source": "fig_forest_tc.py — P10 of the deadline bound on SSP2-4.5: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcAmazon (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcAmazonSSPmidNotReachedPct": {
+    "value": "71.7",
+    "source": "fig_forest_tc.py — % of the draws with t_c > 0 that SSP2-4.5 never brings to mu_now before \\emissionPathLastYear (seed=42)",
+    "requires_network": false
+  },
+  "tcAmazonSSPhigh": {
+    "value": "78",
+    "source": "fig_forest_tc.py — median of the deadline bound on SSP3-7.0: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcAmazon (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcAmazonSSPhighPten": {
+    "value": "37",
+    "source": "fig_forest_tc.py — P10 of the deadline bound on SSP3-7.0: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcAmazon (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcAmazonSSPhighNotReachedPct": {
+    "value": "14.1",
+    "source": "fig_forest_tc.py — % of the draws with t_c > 0 that SSP3-7.0 never brings to mu_now before \\emissionPathLastYear (seed=42)",
+    "requires_network": false
+  },
+  "tcWAISSSPmid": {
+    "value": "25",
+    "source": "fig_forest_tc.py — median of the deadline bound on SSP2-4.5: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcWAIS (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcWAISSSPmidPten": {
+    "value": "5",
+    "source": "fig_forest_tc.py — P10 of the deadline bound on SSP2-4.5: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcWAIS (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcWAISSSPmidPninety": {
+    "value": "215",
+    "source": "fig_forest_tc.py — P90 of the deadline bound on SSP2-4.5: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcWAIS (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcWAISSSPmidNotReachedPct": {
+    "value": "10.0",
+    "source": "fig_forest_tc.py — % of the draws with t_c > 0 that SSP2-4.5 never brings to mu_now before \\emissionPathLastYear (seed=42)",
+    "requires_network": false
+  },
+  "tcWAISSSPhigh": {
+    "value": "20",
+    "source": "fig_forest_tc.py — median of the deadline bound on SSP3-7.0: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcWAIS (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcWAISSSPhighPten": {
+    "value": "4",
+    "source": "fig_forest_tc.py — P10 of the deadline bound on SSP3-7.0: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcWAIS (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcWAISSSPhighPninety": {
+    "value": "57",
+    "source": "fig_forest_tc.py — P90 of the deadline bound on SSP3-7.0: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \\tcWAIS (seed=42); unreached draws count as +inf, a centile among them gets no macro",
+    "requires_network": false
+  },
+  "tcWAISSSPhighNotReachedPct": {
+    "value": "1.2",
+    "source": "fig_forest_tc.py — % of the draws with t_c > 0 that SSP3-7.0 never brings to mu_now before \\emissionPathLastYear (seed=42)",
+    "requires_network": false
+  },
+  "etaStarReversal": {
+    "value": "1.00",
+    "source": "noise_reversal_frontier.py — eta* at which dPi/dsigma changes sign for the fold, AT THE AMOC CALIBRATION: it is not a constant, moving with kappa = 2 rho/lambda, the kappa of the AMOC calibration printed in section 6 of the capture",
+    "requires_network": true
+  },
+  "kappaReversalCeiling": {
+    "value": "0.075",
+    "source": "noise_reversal_frontier.py — the kappa below which the frontier lies ABOVE the window ceiling eta* = 1, so that the ceiling alone certifies the sign of dPi/dsigma",
+    "requires_network": true
+  },
+  "reversalLawSlope": {
+    "value": "0.371",
+    "source": "noise_reversal_frontier.py — slope of eta*_rev^3 in log(1/kappa) at the small-kappa end, against the Kramers prediction 3/8; the frontier is logarithmic, not a power law",
+    "requires_network": true
+  },
+  "PhiPrimeZero": {
+    "value": "2.044",
+    "source": "closed form: Phi'(0) = 2 (3/2)^{1/3} Gamma(4/3), the amplitude's slope at zero discounting; verified against the solved amplitude, which reaches 2.044253 at rho_tilde = 1e-4",
+    "requires_network": false
+  },
+  "LmaxFlowPct": {
+    "value": "2",
+    "source": "closed form: 100 rho Lmax, rho=0.03 (rhoBase), Lmax=0.67 (Lmax), the flow loss at the top of the damage range (%)",
+    "requires_network": false
+  },
+  "bhpCascadeFactor": {
+    "value": "0.6116",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpElasticityNuOne": {
+    "value": "+1.69",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpElasticityNuZero": {
+    "value": "-0.1505",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpHoneRatio": {
+    "value": "174",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpHoneStar": {
+    "value": "60.96\\%\\,{}^{\\circ}\\mathrm{C}^{-1}\\,\\mathrm{yr}^{-1}",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpKinkE": {
+    "value": "555.56",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpKinkYears": {
+    "value": "6.1",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpLamTwo": {
+    "value": "0.08",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpLambda": {
+    "value": "0.00689",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpLambdaStar": {
+    "value": "1.20",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpNuStar": {
+    "value": "0.0786",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpPremiumRatio": {
+    "value": "3.44",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpPriceRatio": {
+    "value": "40.1",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpRho": {
+    "value": "0.0508",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpS": {
+    "value": "0.0909",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpShare": {
+    "value": "2.49",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpUnravel": {
+    "value": "50",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "bhpWait": {
+    "value": "2857",
+    "source": "bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "xoverClassFactorAtLow": {
+    "value": "2.65",
+    "source": "crossover.py — the power law SCC ~ eps^(p-1) read at p=1/2 and p=1 on the AMOC threshold range (Armstrong McKay et al. 2022, Table 1) and the current warming (Forster et al. 2024); the class factor ties the two prefactors at eps = 1",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "xoverEps": {
+    "value": "0.029",
+    "source": "crossover.py — the power law SCC ~ eps^(p-1) read at p=1/2 and p=1 on the AMOC threshold range (Armstrong McKay et al. 2022, Table 1) and the current warming (Forster et al. 2024); the class factor ties the two prefactors at eps = 1",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "xoverEpsHigh": {
+    "value": "0.850",
+    "source": "crossover.py — the power law SCC ~ eps^(p-1) read at p=1/2 and p=1 on the AMOC threshold range (Armstrong McKay et al. 2022, Table 1) and the current warming (Forster et al. 2024); the class factor ties the two prefactors at eps = 1",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "xoverEpsLow": {
+    "value": "0.143",
+    "source": "crossover.py — the power law SCC ~ eps^(p-1) read at p=1/2 and p=1 on the AMOC threshold range (Armstrong McKay et al. 2022, Table 1) and the current warming (Forster et al. 2024); the class factor ties the two prefactors at eps = 1",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "xoverEpsPct": {
+    "value": "2.9",
+    "source": "crossover.py — the power law SCC ~ eps^(p-1) read at p=1/2 and p=1 on the AMOC threshold range (Armstrong McKay et al. 2022, Table 1) and the current warming (Forster et al. 2024); the class factor ties the two prefactors at eps = 1",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "xoverRangeFactor": {
+    "value": "5.83",
+    "source": "crossover.py — the power law SCC ~ eps^(p-1) read at p=1/2 and p=1 on the AMOC threshold range (Armstrong McKay et al. 2022, Table 1) and the current warming (Forster et al. 2024); the class factor ties the two prefactors at eps = 1",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recBiasFailPct": {
+    "value": "69",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recBiasPassPct": {
+    "value": "28",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recClassPowerGap": {
+    "value": "0.04",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recDDConstSizeCentreA": {
+    "value": "28",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recDDConstSizeCentreB": {
+    "value": "40",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recDDConstSizeHi": {
+    "value": "94",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recDDConstSizeLo": {
+    "value": "1.5",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recDDConstSizeSigmaRising": {
+    "value": "82",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recDDFreeShareOfBoundHi": {
+    "value": "81",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recDDFreeShareOfBoundLo": {
+    "value": "79",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recDDFreeSizeHi": {
+    "value": "10",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recDDFreeSizeLo": {
+    "value": "4",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonFoldEightyFromNow": {
+    "value": "128",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonFoldEightyRecord": {
+    "value": "274",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonFoldEightySpentPct": {
+    "value": "82",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonFoldEightyToThreshold": {
+    "value": "28.1",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonFoldFiftyFixedRecord": {
+    "value": "10.4",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonFoldFiftyFromNow": {
+    "value": "90",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonFoldFiftyRecord": {
+    "value": "236",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonFoldFiftySpentPct": {
+    "value": "58",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonFoldFiftyToThreshold": {
+    "value": "65.5",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonTransEightyFromNow": {
+    "value": "73",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonTransEightyToThreshold": {
+    "value": "83",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonTransFiftyFromNow": {
+    "value": "38",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recHorizonTransFiftyToThreshold": {
+    "value": "118",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recJointOriginIn": {
+    "value": "116",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recJointRaysIn": {
+    "value": "120",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recJointSigChange": {
+    "value": "0",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recJointSpecs": {
+    "value": "120",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recJointThetaDecline": {
+    "value": "22",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recNPFoldNear": {
+    "value": "0.68",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recNPFoldNow": {
+    "value": "0.12",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recNPFoldNowGridHi": {
+    "value": "0.13",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recNPFoldNowGridLo": {
+    "value": "0.11",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recNPTransNow": {
+    "value": "0.24",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recNPtcNear": {
+    "value": "0.5",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recNPtcNow": {
+    "value": "156",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recRecordYears": {
+    "value": "146",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recSEExponent": {
+    "value": "3/2",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recSigmaTrendCentre": {
+    "value": "0.46",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recSigmaTrendHi": {
+    "value": "1.06",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recSigmaTrendLo": {
+    "value": "-0.15",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recSlopeLimitCoef": {
+    "value": "3",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recThetaWFail": {
+    "value": "4.5",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recThetaWFloor": {
+    "value": "10",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recThetaWMinValid": {
+    "value": "8.9",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recThetaWPass": {
+    "value": "11.4",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recTrendLengthFifty": {
+    "value": "349",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recWindowCells": {
+    "value": "16",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recWindowOptCells": {
+    "value": "15",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recWindowOptSharePct": {
+    "value": "41",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recWindowOptYears": {
+    "value": "60",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "recWindowYears": {
+    "value": "40",
+    "source": "record_detectability.py — read from the record-detectability study outputs in 02_output/record_study (written by 01_code/05_record_study/, or copied from 00_data/record_study with RECORD_STUDY=cached)",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valCollapseRhoTildeA": {
+    "value": "0.05",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valCollapseDevPctA": {
+    "value": "0.0028",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valCollapseRhoTildeB": {
+    "value": "0.2",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valCollapseDevPctB": {
+    "value": "0.0025",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valCollapseRhoTildeC": {
+    "value": "1",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valCollapseDevPctC": {
+    "value": "0.0038",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valCollapseGapPct": {
+    "value": "0.0064",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valFoldSlopeFar": {
+    "value": "-0.492",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valLeadEpsWide": {
+    "value": "0.05",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valLeadEpsNarrow": {
+    "value": "0.01",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valLeadErrMaxPctWide": {
+    "value": "94",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valLeadErrMaxPctNarrow": {
+    "value": "26",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valLeadEtaMax": {
+    "value": "0.32",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valLeadErrSlope": {
+    "value": "0.62",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valLeadErrSlopeLo": {
+    "value": "0.61",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valLeadErrSlopeHi": {
+    "value": "0.63",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valPitchSlopeFar": {
+    "value": "0.500",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valPitchSlopeFix": {
+    "value": "0.50",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valTcFoldGapPct": {
+    "value": "0.000000040",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valTcSlopeFix": {
+    "value": "1.00",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valSensFEtaLo": {
+    "value": "0.1",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "valSensFGapPctLo": {
+    "value": "-11",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "valSensFShortPctLo": {
+    "value": "11",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "valSensFEtaHi": {
+    "value": "1",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "valSensFGapPctHi": {
+    "value": "-87",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "valSensFShortPctHi": {
+    "value": "87",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "valLawRatioSmallRhoA": {
+    "value": "1.1",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valSmallRhoEtaA": {
+    "value": "0.1",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valLawRatioSmallRhoB": {
+    "value": "1.9",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valSmallRhoEtaB": {
+    "value": "0.3",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valSmallRho": {
+    "value": "0.02",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": false,
+    "verbatim": true
+  },
+  "valAmocRhoTilde": {
+    "value": "0.0076",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "valLawRatioAmoc": {
+    "value": "1.2",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "valBtermRatioAmoc": {
+    "value": "2.6",
+    "source": "validation_bvp.py — app:solver, BVP validation (solve_bvp tol 1e-8, domain >= 8 noise scales); see the script's printed tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "epsRhoAMOC": {
+    "value": "0.14",
+    "source": "moving_budget.py — the price at fixed state when the budget is spent at E_0, against the frozen price (AMOC, eta*_now in {0.1, 0.25, 0.5, 1}); see the script's tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "movingRatioAtEpsRhoPct": {
+    "value": "0.38",
+    "source": "moving_budget.py — the price at fixed state when the budget is spent at E_0, against the frozen price (AMOC, eta*_now in {0.1, 0.25, 0.5, 1}); see the script's tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "movingRatioAtEpsRhoPctEtaOne": {
+    "value": "8.5",
+    "source": "moving_budget.py — the price at fixed state when the budget is spent at E_0, against the frozen price (AMOC, eta*_now in {0.1, 0.25, 0.5, 1}); see the script's tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "movingDepartLo": {
+    "value": "0.2",
+    "source": "moving_budget.py — the price at fixed state when the budget is spent at E_0, against the frozen price (AMOC, eta*_now in {0.1, 0.25, 0.5, 1}); see the script's tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "movingDepartHi": {
+    "value": "1.7",
+    "source": "moving_budget.py — the price at fixed state when the budget is spent at E_0, against the frozen price (AMOC, eta*_now in {0.1, 0.25, 0.5, 1}); see the script's tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "movingSlopeDeep": {
+    "value": "-0.20",
+    "source": "moving_budget.py — the price at fixed state when the budget is spent at E_0, against the frozen price (AMOC, eta*_now in {0.1, 0.25, 0.5, 1}); see the script's tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "movingPeakRatio": {
+    "value": "1.8",
+    "source": "moving_budget.py — the price at fixed state when the budget is spent at E_0, against the frozen price (AMOC, eta*_now in {0.1, 0.25, 0.5, 1}); see the script's tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "movingErrNowPct": {
+    "value": "11",
+    "source": "moving_budget.py — the price at fixed state when the budget is spent at E_0, against the frozen price (AMOC, eta*_now in {0.1, 0.25, 0.5, 1}); see the script's tables",
+    "requires_network": true,
+    "verbatim": true
+  }
+}

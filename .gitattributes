@@ -1,0 +1,18 @@
+# Files written by make_tables_values.py are LF on every platform, so that a
+# checkout compares byte for byte with what a run writes (core.autocrlf would make them CRLF).
+manuscript/values.tex text eol=lf
+manuscript/tables/*.tex text eol=lf
+02_output/values/values_generated.tex text eol=lf
+# The shipped record-study outputs are LF too, as the study scripts write them.
+00_data/record_study/*.json text eol=lf
+# The copies of the manuscript's inputs under 02_output/ follow the same rules, and the
+# manifest too; the figure PDFs are binary and compared byte for byte.
+02_output/tables/*.tex text eol=lf
+02_output/paper_manifest.json text eol=lf
+02_output/figures/*.pdf binary
+manuscript/figures/*.pdf binary
+# The other text files the run writes, all LF, so that git status is empty after a clean run.
+02_output/computed.json text eol=lf
+02_output/values/counts.json text eol=lf
+02_output/values/VALUES_DIFF.md text eol=lf
+README.md text eol=lf
