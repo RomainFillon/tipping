@@ -95,19 +95,67 @@ def strip_tex_comments(txt: str) -> str:
     return "\n".join(out)
 
 
-def paper_title(txt: str) -> str:
-    r"""The manuscript's own \title{...}, with its commented-out subtitle stripped."""
-    m = re.search(r"\\title\{", txt)
-    if not m:
-        raise SystemExit(f"[ERROR] no \\title{{...}} found in {PAPER}.")
-    i, depth = m.end(), 1
+def _close(txt: str, i: int) -> int:
+    r"""Index just past the brace that closes the group whose content starts at i (\{ and \}
+    are escaped braces, not group delimiters)."""
+    depth = 1
     while i < len(txt) and depth:
+        if txt[i] == "\\":
+            i += 2
+            continue
         if txt[i] == "{":
             depth += 1
         elif txt[i] == "}":
             depth -= 1
         i += 1
-    return " ".join(strip_comments(txt[m.end():i - 1]).split())
+    if depth:
+        raise SystemExit(f"[ERROR] unbalanced braces in the \\title{{...}} of {PAPER}.")
+    return i
+
+
+NOTE_RE = re.compile(r"\\(?:thanks|footnote)\s*(?:\[[^\]]*\])?\s*\{")
+
+
+def strip_notes(title: str) -> str:
+    r"""Drop every \thanks{...} and \footnote[...]{...} from a title, nested braces included: a
+    note attached to the title (a journal's footnote, an acknowledgement) is not part of it."""
+    while True:
+        m = NOTE_RE.search(title)
+        if not m:
+            return title
+        title = title[:m.start()] + title[_close(title, m.end()):]
+
+
+def paper_title(txt: str) -> str:
+    r"""The manuscript's own \title{...}: commented-out lines stripped, then any \thanks{...} or
+    \footnote{...} attached to it, then the whitespace normalised."""
+    m = re.search(r"\\title\{", txt)
+    if not m:
+        raise SystemExit(f"[ERROR] no \\title{{...}} found in {PAPER}.")
+    i = _close(txt, m.end())
+    return " ".join(strip_notes(strip_comments(txt[m.end():i - 1])).split())
+
+
+TITLE_CASES = [   # (source, expected title): the self-test of paper_title, run before every write
+    (r"\title{Pricing Risk at a Boundary\thanks{This paper generates no data: it develops a "
+     r"model {with braces}, and 100\% of it is theory.}}", "Pricing Risk at a Boundary"),
+    ("\\title{Pricing Risk at a Boundary\\thanks{A journal's note.}}\n%\\title{Pricing Risk at a Boundary}\n"
+     "%\\\\[4pt]\n%}", "Pricing Risk at a Boundary"),
+    (r"\title{Pricing Risk\footnote[1]{A note.} at a Boundary}", "Pricing Risk at a Boundary"),
+    ("\\title{Pricing Risk at a Boundary\n%\\thanks{commented out}\n}", "Pricing Risk at a Boundary"),
+    ("\\title{Pricing Risk at a Boundary\n%\\\\[4pt]\n%\\large Tipping Risk and the Social Cost of Carbon\n}",
+     "Pricing Risk at a Boundary"),
+    (r"\title{A \thanks{x} B \footnote{y}}", "A B"),
+]
+
+
+def self_test_title() -> None:
+    r"""paper_title on titles that carry a \thanks, a \footnote or comments; stops on any failure."""
+    for src, want in TITLE_CASES:
+        got = paper_title(src)
+        if got != want:
+            raise SystemExit(f"[ERROR] paper_manifest.paper_title: {src!r} gives {got!r}, expected {want!r}")
+    print(f"paper_title self-test: {len(TITLE_CASES)} titles with \\thanks, \\footnote or comments, all as expected")
 
 
 def exhibits(txt: str):
@@ -217,6 +265,7 @@ def main() -> int:
     if not manuscript_present():
         print("[ERROR] paper_manifest.py --write reads manuscript/, which is not present.")
         return 1
+    self_test_title()
     m = build()
     MANIFEST.write_text(json.dumps(m, indent=1, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     print(f"{MANIFEST.relative_to(ROOT).as_posix()}: {len(m['exhibits'])} exhibits, "

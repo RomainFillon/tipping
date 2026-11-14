@@ -42,7 +42,7 @@ import estimateurs as es                                     # noqa: E402  (tabu
 pu, dr = es.pu, es.dr
 L = 146
 W = [4, 6, 8, 10, 15, 20, 30, 40, 50, 60, 73]
-TCS = [0.5, 1, 2, 5, 10, 20, 40, 156]
+TCS = [0.5, 1, 2, 5, 10, 20, 40, dr.tc_now()]                       # tc_now(): 156, today's distance
 
 
 def per_record(y):

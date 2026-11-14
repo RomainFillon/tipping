@@ -120,7 +120,7 @@ def main():
     for a in (0.2, 0.5, 0.61, 0.9, 0.99):
         assert abs(lam_tab(np.array(a)) - am.lam_from_ac1(a)) / am.lam_from_ac1(a) < 1e-4
     print("tabulation of lam_from_ac1: relative gap < 1e-4 on AC1 in {0.2 ... 0.99} [OK]")
-    TCS = [0.5, 1, 2, 5, 10, 20, 40, 80, 156]
+    TCS = [0.5, 1, 2, 5, 10, 20, 40, 80, dr.tc_now()]               # tc_now(): 156, today's distance
     jobs, seed = [], 1300
     for L in (146,):
         for k in range(4):                                     # null: 4 x 1000

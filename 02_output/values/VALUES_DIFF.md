@@ -1,7 +1,7 @@
 # VALUES_DIFF.md — generated values vs manuscript snapshot (Stage A, non-destructive)
 
-Macros: **43 literature-input**, **199 computed**. There is no carried-over family: a macro with no generator and no sourced value fails the run.
-Computed verdicts: 199 match, 0 benign (MC noise/rounding), **0 substantive**.
+Macros: **43 literature-input**, **230 computed**. There is no carried-over family: a macro with no generator and no sourced value fails the run.
+Computed verdicts: 230 match, 0 benign (MC noise/rounding), **0 substantive**.
 
 The manuscript is NOT modified. `diff:benign` = within MC noise / rounding; `diff:SUBSTANTIVE` = inspect before adopting (Stage B). `INPUT` rows should match by construction (literature value = paper value).
 
@@ -92,7 +92,21 @@ The manuscript is NOT modified. `diff:benign` = within MC noise / rounding; `dif
 | `\bhpS` | 0.0909 | 0.0909 | COMPUTED | MATCH | bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290) |
 | `\bhpShare` | 2.49 | 2.49 | COMPUTED | MATCH | bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290) |
 | `\bhpWait` | 2857 | 2857 | COMPUTED | MATCH | bhp_bound.py — closed form of eq:ceiling_body under the floored hazard lambda_1 = h_1T max(0, T - T*), inputs from van2026three's replication package (Zenodo 20075290) |
+| `\ceilEpsOverEpsDynFHi` | 2.1 | 2.1 | COMPUTED | MATCH | fixed_ceiling.py — largest eps_bar*/eps_dyn at eta*_now = F, over g (computed.json: ceilEpsOverEpsDynFHi) |
+| `\ceilEpsOverEpsDynFLo` | 1.0 | 1.0 | COMPUTED | MATCH | fixed_ceiling.py — smallest eps_bar*/eps_dyn at eta*_now = F, over g (computed.json: ceilEpsOverEpsDynFLo) |
+| `\ceilEtaCHi` | 1.46 | 1.46 | COMPUTED | MATCH | fixed_ceiling.py — largest eta*(eps_bar*) at the interior fixed ceilings (all g) (computed.json: ceilEtaCHi) |
+| `\ceilEtaCHiCheap` | 1.46 | 1.46 | COMPUTED | MATCH | fixed_ceiling.py — largest eta*(eps_bar*) at the interior fixed ceilings with g <= 0.1 (computed.json: ceilEtaCHiCheap) |
+| `\ceilEtaCLo` | 0.88 | 0.88 | COMPUTED | MATCH | fixed_ceiling.py — smallest eta*(eps_bar*) = d/(2 l) at the interior fixed ceilings (> 5 yr before t_c, eta*_now >= 1.25, all g in {0.01..0.5}) (computed.json: ceilEtaCLo) |
+| `\ceilEtaCLoCheap` | 1.15 | 1.15 | COMPUTED | MATCH | fixed_ceiling.py — smallest eta*(eps_bar*) at the interior fixed ceilings with g <= 0.1 (computed.json: ceilEtaCLoCheap) |
+| `\ceilGSwitchEtaOne` | 0.13 | 0.13 | COMPUTED | MATCH | fixed_ceiling.py — g_switch = (phi_A3 - phi_frozen)/(1 - phi_frozen) at eta*_now = 1: below it the best fixed ceiling is 'stop today', above it 'never stop' (computed.json: ceilGSwitchEtaOne) |
+| `\ceilInteriorCount` | 23 | 23 | COMPUTED | MATCH | fixed_ceiling.py — number of interior fixed ceilings (> 5 yr before t_c) among eta*_now in {1.25, 1.5, 2, 3, F} x g in {0.01, 0.02, 0.05, 0.1, 0.2, 0.5} (computed.json: ceilInteriorCount) |
+| `\ceilTauEqMaxInLayer` | 40 | 40 | COMPUTED | MATCH | fixed_ceiling.py — largest certainty-equivalent crossing date tau_eq = -ln(phi)/rho (yr) inside the noise layer, eta*_now <= 1, stop today or never (fold, from x*(eps_now)) (computed.json: ceilTauEqMaxInLayer) |
+| `\ceilYearsBeforeTcFHi` | 14 | 14 | COMPUTED | MATCH | fixed_ceiling.py — largest t_c - t* (yr) of the best fixed ceiling at eta*_now = F, over g (computed.json: ceilYearsBeforeTcFHi) |
+| `\ceilYearsBeforeTcFLo` | 7 | 7 | COMPUTED | MATCH | fixed_ceiling.py — smallest t_c - t* (yr) of the best fixed ceiling at eta*_now = F, over g (computed.json: ceilYearsBeforeTcFLo) |
 | `\classFactorAtEpsDynAMOC` | 6.1 | 6.1 | COMPUTED | MATCH | closed form: eps_dyn^(-1/2) for the AMOC at E_0, eps_dyn=0.0272; the class factor tied at eps = 1, as \xoverClassFactorAtCentral |
+| `\classFoldEtaStop` | 1.21 | 1.21 | COMPUTED | MATCH | ceiling_classes.py — margin eta*(eps_bar*) at the best fixed ceiling, fold, eta*_now = 2, g = 0.1 (computed.json: classFoldEtaStop) |
+| `\classPitchEtaStop` | 0.80 | 0.80 | COMPUTED | MATCH | ceiling_classes.py — margin eta*(eps_bar*) at the best fixed ceiling, pitchfork, eta*_now = 2, g = 0.1 (each class recovers today at the measured theta) (computed.json: classPitchEtaStop) |
+| `\classTcEtaStop` | 1.23 | 1.23 | COMPUTED | MATCH | ceiling_classes.py — margin eta*(eps_bar*) at the best fixed ceiling, transcritical, eta*_now = 2, g = 0.1 (computed.json: classTcEtaStop) |
 | `\emissionPathSSPmidZeroYear` | 2250 | 2250 | COMPUTED | MATCH | fig_forest_tc.py via emission_paths.py — first year from which SSP2-4.5 CO2 emissions stay at zero in its published extension (Meinshausen et al. 2020); RCMIP v5.1.0 (Zenodo 4589756), Emissions|CO2, World, with the extensions of Meinshausen et al. 2020; extract in 00_data/emissions/ |
 | `\emissionPathStartYear` | 2024 | 2024 | COMPUTED | MATCH | fig_forest_tc.py via emission_paths.py — T0, the year the emission paths start from; 2024, the start year the paper adopts (E_0 and DT_0 carry no year of their own) |
 | `\epsAMOCnat` | 0.70 | 0.70 | COMPUTED | MATCH | closed form: (DT*-1.2)/DT*, DT*=4 (AM2022), DT_cur=1.2 (AR6) |
@@ -121,6 +135,20 @@ The manuscript is NOT modified. `diff:benign` = within MC noise / rounding; `dif
 | `\fracWAISalreadyPct` | 25.2 | 25.2 | COMPUTED | MATCH | fig_forest_tc.py — % of WAIS draws with DT* below present warming, i.e. mu_now = 0 and the deadline already passed (seed=42); these are excluded from the ordering sample |
 | `\fracWAISbeforeAmazon` | 95 | 95 | COMPUTED | MATCH | fig_forest_tc.py — share of the draws with both bounds finite (t_c > 0) in which the ice sheet's bound is no later than the Amazon's (seed=42) |
 | `\fracWAISbeforeAmazonIncl` | 96.4 | 96.4 | COMPUTED | MATCH | fig_forest_tc.py — CONTROL on the exclusion: the same share with the already-crossed draws entered at t_c = 0 (seed=42) |
+| `\hazardCeilCases` | 11 | 11 | COMPUTED | MATCH | hazard_ceiling.py — number of quasi-static cases among 3 classes x eta*_now in {2, F} x g in {0.02, 0.1, 0.5} (computed.json: hazardCeilCases) |
+| `\hazardCeilGapMaxPct` | 3 | 3 | COMPUTED | MATCH | hazard_ceiling.py — the same gap relative to (t_c - t*)_true (%) (computed.json: hazardCeilGapMaxPct) |
+| `\hazardCeilGapMaxYears` | 0.7 | 0.7 | COMPUTED | MATCH | hazard_ceiling.py — largest |(t_c - t*)_hazard - (t_c - t*)_true| (yr) over the quasi-static cases (true ceiling interior, > 5 yr before t_c), three classes (computed.json: hazardCeilGapMaxYears) |
+| `\hazardEarlyHiYears` | 19.5 | 19.5 | COMPUTED | MATCH | hazard_ceiling.py — largest advance (yr) of the hazard's stop over the true one, missed cases (computed.json: hazardEarlyHiYears) |
+| `\hazardEarlyLoYears` | 1.5 | 1.5 | COMPUTED | MATCH | hazard_ceiling.py — smallest advance (yr) of the hazard's stop over the true one, missed cases (computed.json: hazardEarlyLoYears) |
+| `\hazardFollowCostFoldPct` | 0.06 | 0.06 | COMPUTED | MATCH | hazard_ceiling.py — largest cost (%) of following the hazard's ceiling, over the six fold cases (computed.json: hazardFollowCostFoldPct) |
+| `\hazardFollowCostMaxPct` | 17 | 17 | COMPUTED | MATCH | hazard_ceiling.py — largest cost (%) of following the hazard's ceiling, over all cases (transcritical, eta*_now = F, g = 0.5) (computed.json: hazardFollowCostMaxPct) |
+| `\hazardFollowCostQSPct` | 0.09 | 0.09 | COMPUTED | MATCH | hazard_ceiling.py — largest cost (%) of following the hazard's ceiling in the true model, c_true(eps_bar_hazard)/c_true(eps_bar*) - 1, over the quasi-static cases (computed.json: hazardFollowCostQSPct) |
+| `\hazardMissCases` | 6 | 6 | COMPUTED | MATCH | hazard_ceiling.py — number of near-exhaustion cases in which the hazard's ceiling is not within 10% of the true one (computed.json: hazardMissCases) |
+| `\hjbGainMaxPct` | 1.49 | 1.49 | COMPUTED | MATCH | hjb_stop.py — largest gain (%) of the full control problem (HJB) over the best fixed ceiling on the same levels (fold, eta*_now in {2, F}, g in {0.02, 0.1, 0.5}), order 2 (computed.json: hjbGainMaxPct) |
+| `\hjbGainMinPct` | 0.20 | 0.20 | COMPUTED | MATCH | hjb_stop.py — smallest gain (%) of the HJB over the best fixed ceiling, over the interior fixed ceilings (> 5 yr before t_c), order 2 (computed.json: hjbGainMinPct) |
+| `\hjbNEpsLevels` | 8000 | 8000 | COMPUTED | MATCH | hjb_stop.py — number of geometric eps-levels of the HJB's main grid (1e-9 to 1.12 eps_now; plus 0 and eps_now) (computed.json: hjbNEpsLevels) |
+| `\hjbOrderGapPosPct` | 0.26 | 0.26 | COMPUTED | MATCH | hjb_stop.py — largest |order 2 / order 1 - 1| (%) of the positions eps_bar* (fixed ceiling) and eps_b (HJB) at the interior fixed ceilings (computed.json: hjbOrderGapPosPct) |
+| `\hjbStopPriceMatchPct` | 0.26 | 0.26 | COMPUTED | MATCH | hjb_stop.py — largest |P/g - 1| (%), P the controlled price -dc/dM at the stop point of the branch from the emitting side (units of rho L/E_0), against g (computed.json: hjbStopPriceMatchPct) |
 | `\kappaAMOC` | 0.076 | 0.076 | COMPUTED | MATCH | closed form: 2 rho / lambda, rho=0.03 (rhoBase), lambda=0.7928 (ews_calibration.py) |
 | `\kappaAmazonBoulton` | 9.68 | 9.68 | COMPUTED | MATCH | closed form: 12 / (1/kappa in months), 1/kappa=1.24 months [Boulton, Lenton and Boers 2022, Nature Climate Change 12:271-278, Methods p. 9 — 1/kappa of the VOD vegetation index, regional mean AR(1), months]; per year |
 | `\kappaReversalCeiling` | 0.075 | 0.075 | COMPUTED | MATCH | noise_reversal_frontier.py — the kappa below which the frontier lies ABOVE the window ceiling eta* = 1, so that the ceiling alone certifies the sign of dPi/dsigma |
@@ -191,10 +219,13 @@ The manuscript is NOT modified. `diff:benign` = within MC noise / rounding; `dif
 | `\sigmaAMOChat` | 0.372 | 0.372 | COMPUTED | MATCH | ews_calibration.py — sigma_clim detrended |
 | `\sigmaAggregationFactor` | 1.43 | 1.43 | COMPUTED | MATCH | closed form: sigma-hat (annual-mean inversion) / sigma-hat (point-sample reading) = sqrt((lambda/-ln AC1) x Var(X_t)/Var(annual means)), lambda=0.7928, -ln AC1=0.4933, variance ratio=1.2808 (ews_calibration.py) |
 | `\sigmaAggregationFactorTheta` | 1.27 | 1.27 | COMPUTED | MATCH | closed form: the same factor through the recovery rate alone, sqrt(lambda/-ln AC1), lambda=0.7928, -ln AC1=0.4933 (ews_calibration.py) |
-| `\tcAMOC` | 164 | 164 | COMPUTED | MATCH | eps_inf_ci.py — deadline bound t_c <= (M*/E0) eps_0 = mu_now/E0 (median calibration, seed=42); free of the backstop cost and of the margin |
+| `\tcAMOC` | 164 | 164 | COMPUTED | MATCH | eps_inf_ci.py — the MONTE CARLO MEDIAN of the deadline bound mu_now/E0 over the draws (seed=42); not the bound at central inputs (tcAMOCcentral) nor the date on the median budget (tcAMOCmedBudget); free of the backstop cost and of the margin |
 | `\tcAMOCPten` | 47 | 47 | COMPUTED | MATCH | fig_forest_tc.py — P10 of the deadline bound mu_now/E0 over the draws with t_c > 0, the left end of the fig:forest_tc bar (seed=42); same sample as the median, no floor |
 | `\tcAMOCSSPhigh` | 95 | 95 | COMPUTED | MATCH | fig_forest_tc.py — median of the deadline bound on SSP3-7.0: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \tcAMOC (seed=42); unreached draws count as +inf, a centile among them gets no macro |
 | `\tcAMOCSSPmidNotReachedPct` | 75.0 | 75.0 | COMPUTED | MATCH | fig_forest_tc.py — % of the draws with t_c > 0 that SSP2-4.5 never brings to mu_now before \emissionPathLastYear (seed=42) |
+| `\tcAMOCcentral` | 156 | 156 | COMPUTED | MATCH | eps_dyn.tc_central() — closed form (DT*-DT_0)/TCRE x 1000 / E_0 at central inputs, DT*=4, DT_0=1.2, TCRE=0.45, E_0=40 (155.56 yr); the distance the record study works at (record_pipeline.tc_now, rounded to the year) |
+| `\tcAMOCconvGapPct` | 6.1 | 6.1 | COMPUTED | MATCH | eps_dyn.py — (tcAMOCmedBudget/tcAMOCcentral - 1) x 100 at full precision: the median of a ratio against the ratio of the central values |
+| `\tcAMOCmedBudget` | 165 | 165 | COMPUTED | MATCH | eps_dyn.tc_med_budget() — eps_now M*_P50/E_0 (165.08 yr), M*_P50 the Monte Carlo median of M* = DT* x 1000/TCRE (calibration_ci.py): the date on the budget moving_budget.py and the planner's scripts solve with |
 | `\tcAmazon` | 131 | 131 | COMPUTED | MATCH | eps_inf_ci.py — deadline bound t_c <= (M*/E0) eps_0 = mu_now/E0 (median calibration, seed=42); free of the backstop cost and of the margin |
 | `\tcAmazonPten` | 54 | 54 | COMPUTED | MATCH | fig_forest_tc.py — P10 of the deadline bound mu_now/E0 over the draws with t_c > 0, the left end of the fig:forest_tc bar (seed=42); same sample as the median, no floor |
 | `\tcAmazonSSPhigh` | 78 | 78 | COMPUTED | MATCH | fig_forest_tc.py — median of the deadline bound on SSP3-7.0: years from T0 until emissions summed from T0 reach mu_now, same draws and sample as \tcAmazon (seed=42); unreached draws count as +inf, a centile among them gets no macro |

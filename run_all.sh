@@ -2,8 +2,8 @@
 # =============================================================================
 # run_all.sh -- the replication package's single entry point.
 #
-#   bash run_all.sh                         # full recomputation (about 3 hours)
-#   RECORD_STUDY=cached bash run_all.sh     # reuse the shipped record-study outputs (about 15 min)
+#   bash run_all.sh                         # full recomputation (about 2 h 13 min, measured; README)
+#   RECORD_STUDY=cached bash run_all.sh     # reuse the shipped record-study outputs (38 to 45 min, measured; README)
 #   PYTHON=/path/to/python bash run_all.sh  # choose the interpreter (default: python3)
 #
 # Recomputes every number, table and figure the manuscript displays, from the raw
@@ -159,7 +159,8 @@ run bhp_bound               "$CODE/01_calibration/bhp_bound.py"
 
 # --- the record-detectability study (ssec:record and app:record in paper.tex) ---
 # Eight scripts write eight JSON files into 02_output/record_study/; record_detectability.py
-# reads them. About 2.5 hours on 6 worker processes, so RECORD_STUDY=cached copies the
+# reads them. 1.3 to 2 hours measured on 6 worker processes (README, Runtime), so
+# RECORD_STUDY=cached copies the
 # shipped outputs instead. In the default mode the recomputed files are compared with the
 # shipped ones and the result is printed in the summary.
 echo
@@ -193,7 +194,7 @@ run fig_record_power        "$CODE/03_figures/fig_record_power.py"
 # evaluation. The import makes the order a real dependency, not a convention.
 run crossover               "$CODE/01_calibration/crossover.py"
 
-# --- the AMOC recovery rate, and the four scripts that depend on it ---
+# --- the AMOC recovery rate, and the ten scripts that depend on it ---
 if run ews_calibration "$CODE/01_calibration/ews_calibration.py"; then
   run reduced_form_scc        "$CODE/01_calibration/reduced_form_scc.py"
   run noise_reversal_frontier "$CODE/02_solvers/noise_reversal_frontier.py"
@@ -202,6 +203,21 @@ if run ews_calibration "$CODE/01_calibration/ews_calibration.py"; then
   # The price while the budget is being spent. Reads theta and M* through eps_dyn.py;
   # deterministic; about 30 s with its own convergence check.
   run moving_budget           "$CODE/02_solvers/moving_budget.py"
+  # The planner's problem with endogenous abatement (step 54): the best fixed ceiling, the full
+  # control problem, the three classes, and the hazard calibrated on the path. Same inputs as
+  # moving_budget.py, whose marcher they import; order 2 in eps; deterministic; each runs its cases
+  # on up to 6 worker processes, and together they took 34 min (2,066 s, 2026-11-13; README,
+  # Runtime). hazard_ceiling.py recomputes
+  # the true model through ceiling_classes.py (no cache).
+  run fixed_ceiling           "$CODE/02_solvers/fixed_ceiling.py"
+  run hjb_stop                "$CODE/02_solvers/hjb_stop.py"
+  run ceiling_classes         "$CODE/02_solvers/ceiling_classes.py"
+  run hazard_ceiling          "$CODE/02_solvers/hazard_ceiling.py"
+  # The two figures of the planner's problem (not yet in the paper, so not copied into
+  # manuscript/): they draw the data fixed_ceiling.py and hjb_stop.py wrote to
+  # 02_output/planner/, and recompute nothing.
+  run fig_ceiling_map         "$CODE/03_figures/fig_ceiling_map.py"
+  run fig_hjb_stop            "$CODE/03_figures/fig_hjb_stop.py"
 else
   # The consequence is stated here rather than left to be discovered at compile time.
   echo
@@ -213,8 +229,9 @@ else
   echo
   echo "   CONSEQUENCE, stated now so it is not discovered later:"
   echo "     * the recovery rate and the detrended variance were NOT estimated;"
-  echo "     * the four scripts that read them were NOT run -- reduced_form_scc,"
-  echo "       noise_reversal_frontier, fig_crossover, moving_budget;"
+  echo "     * the ten scripts that read them were NOT run -- reduced_form_scc,"
+  echo "       noise_reversal_frontier, fig_crossover, moving_budget, fixed_ceiling,"
+  echo "       hjb_stop, ceiling_classes, hazard_ceiling, fig_ceiling_map, fig_hjb_stop;"
   if [ "$RECORD_STUDY" = "full" ]; then
     echo "     * the record study could not read the series either (identification.py,"
     echo "       then calib82.py); RECORD_STUDY=cached reuses its shipped outputs;"

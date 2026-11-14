@@ -46,6 +46,10 @@ SCRIPTS = {
     "record_detectability": CODE / "01_calibration" / "record_detectability.py",
     "validation_bvp": CODE / "02_solvers" / "validation_bvp.py",
     "moving_budget":  CODE / "02_solvers" / "moving_budget.py",
+    "fixed_ceiling":  CODE / "02_solvers" / "fixed_ceiling.py",
+    "hjb_stop":       CODE / "02_solvers" / "hjb_stop.py",
+    "ceiling_classes": CODE / "02_solvers" / "ceiling_classes.py",
+    "hazard_ceiling": CODE / "02_solvers" / "hazard_ceiling.py",
 }
 
 
@@ -416,9 +420,26 @@ def main():
     if dts_amoc:
         e0 = float(LITERATURE_MACROS["EglobalRate"][0])
         avail = float(dts_amoc[0]) - dtc
-        put("tcAMOCcentral", f"{avail/tcre_med*1000.0/e0:.0f}",
-            f"closed form: (DT*-DT_0)/TCRE x 1000 / E_0 at central inputs, "
-            f"DT*={dts_amoc[0]}, DT_0={dtc}, TCRE={tcre_med}, E_0={e0:.0f}")
+        # The AMOC's bound three ways (eps_dyn.py computes the first two, once): the closed form
+        # at central inputs (the record study's distance), the date on the median budget M*_P50
+        # (moving_budget.py and the planner), and \tcAMOC below, the Monte Carlo median.
+        sys.path.insert(0, str(CODE / "01_calibration"))
+        import eps_dyn as _ed
+        tc_cen, tc_med = _ed.tc_central(), _ed.tc_med_budget()
+        if tc_cen != avail / tcre_med * 1000.0 / e0:
+            raise SystemExit("[ERROR] eps_dyn.tc_central() = %r against the closed form here %r"
+                             % (tc_cen, avail / tcre_med * 1000.0 / e0))
+        put("tcAMOCcentral", f"{tc_cen:.0f}",
+            f"eps_dyn.tc_central() — closed form (DT*-DT_0)/TCRE x 1000 / E_0 at central inputs, "
+            f"DT*={dts_amoc[0]}, DT_0={dtc}, TCRE={tcre_med}, E_0={e0:.0f} ({tc_cen:.2f} yr); the distance "
+            f"the record study works at (record_pipeline.tc_now, rounded to the year)")
+        put("tcAMOCmedBudget", f"{tc_med:.0f}",
+            f"eps_dyn.tc_med_budget() — eps_now M*_P50/E_0 ({tc_med:.2f} yr), M*_P50 the Monte Carlo median "
+            f"of M* = DT* x 1000/TCRE (calibration_ci.py): the date on the budget moving_budget.py and the "
+            f"planner's scripts solve with")
+        put("tcAMOCconvGapPct", f"{100.0 * (tc_med / tc_cen - 1.0):.1f}",
+            f"eps_dyn.py — (tcAMOCmedBudget/tcAMOCcentral - 1) x 100 at full precision: the median of a "
+            f"ratio against the ratio of the central values")
         # The class factor eps^{-1/2} at the CENTRAL AMOC threshold, the counterpart of
         # \xoverClassFactorAtLow (the near end of the range). Two decimals, like that macro.
         eps_c = avail / float(dts_amoc[0])
@@ -470,7 +491,10 @@ def main():
     for m in re.finditer(r"^\s*(\w+):\s*t_c_bound=([\d.]+)yr", epsi, re.MULTILINE):
         el, val = m.groups()
         if el in ("AMOC", "Amazon", "WAIS"):
-            put(f"tc{el}", str(round(float(val))), tc_src)
+            put(f"tc{el}", str(round(float(val))), tc_src if el != "AMOC" else
+                ("eps_inf_ci.py — the MONTE CARLO MEDIAN of the deadline bound mu_now/E0 over the draws "
+                 "(seed=42); not the bound at central inputs (tcAMOCcentral) nor the date on the median "
+                 "budget (tcAMOCmedBudget); free of the backstop cost and of the margin"))
 
     # ── parsed: WAIS immediate-action fraction (eps_inf >= eps_0) at c_bar=100, from the forest ──
     # fig_forest_tc.py prints: "WAIS  : t_c=  4.6 yr [...] immediate(eps_inf>=eps0)=21%"
@@ -752,6 +776,83 @@ def main():
         n_mov += 1
     if n_mov != 8:
         raise SystemExit("[ERROR] moving_budget.out carries %d 'MOVING' lines, expected 8." % n_mov)
+
+    # -- parsed: the planner's problem with endogenous abatement (step 54), four scripts --
+    # Lines read "<PREFIX> <macro> = <value>", formatted by the script (verbatim). Every value is
+    # computed at order 2 in eps (BDF2) on the AMOC calibration (theta and M* through eps_dyn.py, so
+    # all need the AMOC series). None is used by paper.tex yet. Each macro carries its own source:
+    # the script, then what the number is. The two *OrderOne fields are diagnostics of hjb_stop.py
+    # (the scheme of step 53): kept in computed.json, never emitted (REMOVED_MACROS).
+    PLANNER = {
+        "fixed_ceiling": ("CEIL", {
+            "ceilTauEqMaxInLayer": "largest certainty-equivalent crossing date tau_eq = -ln(phi)/rho (yr) inside "
+                                   "the noise layer, eta*_now <= 1, stop today or never (fold, from x*(eps_now))",
+            "ceilGSwitchEtaOne": "g_switch = (phi_A3 - phi_frozen)/(1 - phi_frozen) at eta*_now = 1: below it the "
+                                 "best fixed ceiling is 'stop today', above it 'never stop'",
+            "ceilEtaCLo": "smallest eta*(eps_bar*) = d/(2 l) at the interior fixed ceilings (> 5 yr before t_c, "
+                          "eta*_now >= 1.25, all g in {0.01..0.5})",
+            "ceilEtaCHi": "largest eta*(eps_bar*) at the interior fixed ceilings (all g)",
+            "ceilEtaCLoCheap": "smallest eta*(eps_bar*) at the interior fixed ceilings with g <= 0.1",
+            "ceilEtaCHiCheap": "largest eta*(eps_bar*) at the interior fixed ceilings with g <= 0.1",
+            "ceilInteriorCount": "number of interior fixed ceilings (> 5 yr before t_c) among eta*_now in "
+                                 "{1.25, 1.5, 2, 3, F} x g in {0.01, 0.02, 0.05, 0.1, 0.2, 0.5}",
+            "ceilYearsBeforeTcFLo": "smallest t_c - t* (yr) of the best fixed ceiling at eta*_now = F, over g",
+            "ceilYearsBeforeTcFHi": "largest t_c - t* (yr) of the best fixed ceiling at eta*_now = F, over g",
+            "ceilEpsOverEpsDynFLo": "smallest eps_bar*/eps_dyn at eta*_now = F, over g",
+            "ceilEpsOverEpsDynFHi": "largest eps_bar*/eps_dyn at eta*_now = F, over g"}),
+        "hjb_stop": ("HJB", {
+            "hjbGainMaxPct": "largest gain (%) of the full control problem (HJB) over the best fixed ceiling on "
+                             "the same levels (fold, eta*_now in {2, F}, g in {0.02, 0.1, 0.5}), order 2",
+            "hjbGainMinPct": "smallest gain (%) of the HJB over the best fixed ceiling, over the interior "
+                             "fixed ceilings (> 5 yr before t_c), order 2",
+            "hjbStopPriceMatchPct": "largest |P/g - 1| (%), P the controlled price -dc/dM at the stop point of "
+                                    "the branch from the emitting side (units of rho L/E_0), against g",
+            "hjbNEpsLevels": "number of geometric eps-levels of the HJB's main grid (1e-9 to 1.12 eps_now; "
+                             "plus 0 and eps_now)",
+            "hjbOrderGapPosPct": "largest |order 2 / order 1 - 1| (%) of the positions eps_bar* (fixed ceiling) "
+                                 "and eps_b (HJB) at the interior fixed ceilings",
+            "hjbGainMaxPctOrderOne": "DIAGNOSTIC (not emitted): hjbGainMaxPct at order 1, the scheme of step 53",
+            "hjbGainMinPctOrderOne": "DIAGNOSTIC (not emitted): hjbGainMinPct at order 1, the scheme of step 53"}),
+        "ceiling_classes": ("CLASS", {
+            "classPitchEtaStop": "margin eta*(eps_bar*) at the best fixed ceiling, pitchfork, eta*_now = 2, g = 0.1 "
+                                 "(each class recovers today at the measured theta)",
+            "classTcEtaStop": "margin eta*(eps_bar*) at the best fixed ceiling, transcritical, eta*_now = 2, g = 0.1",
+            "classFoldEtaStop": "margin eta*(eps_bar*) at the best fixed ceiling, fold, eta*_now = 2, g = 0.1"}),
+        "hazard_ceiling": ("HAZARD", {
+            "hazardCeilGapMaxYears": "largest |(t_c - t*)_hazard - (t_c - t*)_true| (yr) over the quasi-static "
+                                     "cases (true ceiling interior, > 5 yr before t_c), three classes",
+            "hazardCeilGapMaxPct": "the same gap relative to (t_c - t*)_true (%)",
+            "hazardCeilCases": "number of quasi-static cases among 3 classes x eta*_now in {2, F} x g in "
+                               "{0.02, 0.1, 0.5}",
+            "hazardMissCases": "number of near-exhaustion cases in which the hazard's ceiling is not within 10% "
+                               "of the true one",
+            "hazardEarlyLoYears": "smallest advance (yr) of the hazard's stop over the true one, missed cases",
+            "hazardEarlyHiYears": "largest advance (yr) of the hazard's stop over the true one, missed cases",
+            "hazardFollowCostQSPct": "largest cost (%) of following the hazard's ceiling in the true model, "
+                                     "c_true(eps_bar_hazard)/c_true(eps_bar*) - 1, over the quasi-static cases",
+            "hazardFollowCostFoldPct": "largest cost (%) of following the hazard's ceiling, over the six fold cases",
+            "hazardFollowCostMaxPct": "largest cost (%) of following the hazard's ceiling, over all cases "
+                                      "(transcritical, eta*_now = F, g = 0.5)"}),
+    }
+    for key, (prefix, desc) in PLANNER.items():
+        txt = get_out(key)
+        got = {}
+        for m in re.finditer(r"^" + prefix + r"\s+(\w+)\s*=\s*(\S+)\s*$", txt, re.MULTILINE):
+            got[m.group(1)] = m.group(2)
+        if set(got) != set(desc):
+            raise SystemExit("[ERROR] %s.out: '%s' lines %s, expected %s" % (key, prefix, sorted(got), sorted(desc)))
+        for name, value in got.items():
+            put(name, value, "%s.py — %s (computed.json: %s)" % (key, desc[name], name), True)
+            C[name]["verbatim"] = True
+    # The claims the step-54 section will rest on, checked here as the other sections' are:
+    # the HJB never does worse than the fixed ceiling, and the hazard errs on the early side.
+    assert float(C["hjbGainMinPct"]["value"]) >= 0, "hjb_stop.py: the HJB above the fixed ceiling"
+    # The record study's distance today is the bound at central inputs (eps_dyn.tc_central, via
+    # record_pipeline.tc_now); appendix app:record says so. A study left on an older distance fails here.
+    if C["recNPtcNow"]["value"] != C["tcAMOCcentral"]["value"]:
+        raise SystemExit("[ERROR] the record study works at t_c = %s, the bound at central inputs is %s"
+                         % (C["recNPtcNow"]["value"], C["tcAMOCcentral"]["value"]))
+    assert float(C["hazardEarlyLoYears"]["value"]) > 0, "hazard_ceiling.py: a missed case stops later than the optimum"
     # ssec:which_parameter. The location factor is computed on the budget, and the crossing moved from
     # 0.168 to the last stretch of the window. An earlier assertion, "about a sixth", guarded
     # a sentence since removed; it is replaced by the three claims the new ssec:which_parameter makes.

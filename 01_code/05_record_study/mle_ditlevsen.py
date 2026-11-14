@@ -60,7 +60,7 @@ L, BURN, SPY = 146, 50, 20
 DT = 1.0 / SPY
 LAM_MID = pu.LAM_MID_G
 TAU = (np.arange(L) + 0.5 - L / 2) / L                      # centred, in record lengths
-TCS = [2, 5, 20, 50, 156]
+TCS = [2, 5, 20, 50, dr.tc_now()]                                    # tc_now(): 156, today's distance
 
 
 # ---------------------------------------------------------------- simulation

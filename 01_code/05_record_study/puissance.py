@@ -159,7 +159,7 @@ def main():
     t0 = time.time()
     print(f"continuous lambda at mid-record for AC1(annual means) = 0.61: {LAM_MID_G:.4f} /yr "
           f"(-ln 0.61 = {-np.log(0.61):.4f}: the annual estimator understates the continuous rate)")
-    TCS = [3, 5, 10, 20, 40, 80, 156, 400, np.inf]
+    TCS = [3, 5, 10, 20, 40, 80, dr.tc_now(), 400, np.inf]          # tc_now(): 156, today's distance
     jobs = []
     seed = 1
     for model in ["lin-1/2", "lin-1", "pli-3", "pli-1.5"]:

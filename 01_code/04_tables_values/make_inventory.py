@@ -83,11 +83,17 @@ SCRIPTS = {
     "02_solvers/validation_bvp.py": "BVP: the numerical validation of app:solver",
     "02_solvers/moving_budget.py": "the price while the budget is being spent (ssec:window, app:additivity)",
     "02_solvers/paper2_all_bifurcations.py": "module: the BVP solvers of the three geometries (imported by validation_bvp.py)",
+    "02_solvers/fixed_ceiling.py": "the planner's best fixed ceiling, order 2 in eps (step 54; not yet in the paper)",
+    "02_solvers/hjb_stop.py": "the planner's full control problem for the fold against the fixed ceiling (step 54; not yet in the paper)",
+    "02_solvers/ceiling_classes.py": "the fixed ceiling for the three classes of Table 1 (step 54; not yet in the paper)",
+    "02_solvers/hazard_ceiling.py": "the ceiling of a hazard calibrated on the path, and the cost of following it (step 54; not yet in the paper)",
     "03_figures/fig_intro_two_boundaries.py": "Figure fig:two_boundaries",
     "03_figures/fig_record_power.py": "Figure fig:record_power (imports record_detectability.compute())",
     "03_figures/fig_bifurcation_intro.py": "Figure fig:bifurcation_intro",
     "03_figures/fig_crossover.py": "Figure fig:crossover (imports crossover.py and eps_dyn.py)",
     "03_figures/fig_forest_tc.py": "Figure fig:forest_tc and the deadline macros on the emission paths",
+    "03_figures/fig_ceiling_map.py": "the map of the best fixed ceiling over (g, eta*_now) (step 54; not yet in the paper)",
+    "03_figures/fig_hjb_stop.py": "the stopping curve and the controlled price of the fold (step 54; not yet in the paper)",
     "04_tables_values/collect_computed.py": "step 2/5: collects the printed results into computed.json",
     "04_tables_values/make_tables_values.py": "step 3/5: writes values.tex, the two table files and VALUES_DIFF.md",
     "04_tables_values/make_inventory.py": "step 3/5: writes the generated sections of this README",
@@ -107,11 +113,16 @@ SCRIPTS = {
 
 def data_for(path: str) -> str:
     """What a script needs in order to run."""
+    if "fig_ceiling_map" in path:
+        return "fixed_ceiling.py outputs (02_output/planner/), so the AMOC series"
+    if "fig_hjb_stop" in path:
+        return "hjb_stop.py outputs (02_output/planner/), so the AMOC series"
     if "ews_calibration" in path or "identification" in path:
         return "AMOC series"
     if "calib82" in path:
         return "AMOC series, via identification.py"
-    if any(s in path for s in ("reduced_form_scc", "noise_reversal_frontier", "fig_crossover", "moving_budget")):
+    if any(s in path for s in ("reduced_form_scc", "noise_reversal_frontier", "fig_crossover", "moving_budget",
+                               "fixed_ceiling", "hjb_stop", "ceiling_classes", "hazard_ceiling")):
         return "AMOC series, via ews_calibration.py"
     if "record_detectability" in path or "fig_record_power" in path:
         return "record-study outputs (02_output/record_study/)"

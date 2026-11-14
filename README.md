@@ -35,7 +35,7 @@ The paper displays 5 figures and 4 tables. Numbers are as LaTeX prints them; lab
 | Table 3 | `tab:eps_dyn` | `02_output/tables/eps_dyn.tex` | `01_code/04_tables_values/make_tables_values.py` | cells are macros of `values.tex`; some cells need the AMOC series |
 | Table 4 | `tab:inputs` | typed in the manuscript | — | 26 macros of `values.tex` |
 
-Every number the text quotes is a macro of `values.tex` (242 macros), written as `02_output/values/values_generated.tex` by `01_code/04_tables_values/make_tables_values.py` from `02_output/computed.json` (the printed results of the scripts, collected by `collect_computed.py`) and from `01_code/inputs_literature.py` (the sourced constants). Each macro carries, as a comment on its own line, the script and the inputs it came from; section 3 groups them by script.
+Every number the text quotes is a macro of `values.tex` (273 macros), written as `02_output/values/values_generated.tex` by `01_code/04_tables_values/make_tables_values.py` from `02_output/computed.json` (the printed results of the scripts, collected by `collect_computed.py`) and from `01_code/inputs_literature.py` (the sourced constants). Each macro carries, as a comment on its own line, the script and the inputs it came from; section 3 groups them by script.
 <!-- END GENERATED MAP -->
 
 The generated sections of this README (between `<!-- BEGIN GENERATED ... -->` markers) are
@@ -89,7 +89,7 @@ series will have a different md5, and should match the summary statistics
 means 0.0683 K², lag-one autocorrelation 0.6106.
 
 <!-- BEGIN GENERATED COUNTS -->
-**36 of the 199 computed macros in `values.tex` carry `[requires network]`**, alongside 43 sourced literature constants (242 macros in the file).
+**64 of the 230 computed macros in `values.tex` carry `[requires network]`**, alongside 43 sourced literature constants (273 macros in the file).
 <!-- END GENERATED COUNTS -->
 
 Those macros cannot be recomputed without the series. In the default mode the record study also
@@ -160,19 +160,25 @@ Intel Core i7-1165G7 (4 cores, 8 threads, 2.8 GHz), 32 GB of RAM. The record stu
 
 ### Runtime
 
-Measured on the hardware below, from a fresh clone, wall clock of `run_all.sh`:
+Measured on the hardware above (Windows 11 Pro, Python 3.14.3), wall clock of `run_all.sh`.
+Every figure below is a measurement, with its date; none is an estimate. They will be measured
+again at the final clean-room run of the package.
 
 | Mode | Command | Runtime |
 |---|---|---|
-| Full recomputation (default) | `bash run_all.sh` | 1 h 25 min to 2 h 11 min (5,114 s and 7,854 s, two runs) |
-| Record study reused | `RECORD_STUDY=cached bash run_all.sh` | 9 min (549 s) |
+| Full recomputation (default) | `bash run_all.sh` | about 2 h 13 min: 1 h 39 min (5,924 s, fresh clone, 2026-10-09) for the package before the four planner scripts, plus 34 min (2,066 s, 2026-11-13) for those four scripts; not yet measured as one run |
+| Record study reused | `RECORD_STUDY=cached bash run_all.sh` | 38 to 45 min (2,306 s and 2,680 s, two fresh clones, 2026-11-14) |
 
-The record study accounts for almost all of the difference: its eight scripts took 4,622 s and
-7,239 s in the two full runs (`puissance.py` 1,292–2,200 s, `mle_ditlevsen.py` 822–1,413 s,
-`calib82.py` 791–1,254 s, `identification.py` 572–1,169 s, `horizon_np.py` 649–705 s,
-`horizon_attente.py` about 460 s, the other two under 30 s each). The longest script outside it
-is `noise_reversal_frontier.py` (7 to 8 min). The faster full run is the clean-room run, in a
-fresh virtual environment built from `requirements-lock.txt`, with nothing else running.
+In the full mode the record study recomputes its eight outputs; in the cached mode
+`run_all.sh` copies the eight shipped JSON files of `00_data/record_study/` instead, and every
+other step still runs. The study accounts for most of the difference: its eight scripts took
+4,622 s and 7,239 s in two full runs of 2026-10-08 (`puissance.py` 1,292–2,200 s,
+`mle_ditlevsen.py` 822–1,413 s, `calib82.py` 791–1,254 s, `identification.py` 572–1,169 s,
+`horizon_np.py` 649–705 s, `horizon_attente.py` about 460 s, the other two under 30 s each).
+Outside it, the longest steps are the four planner scripts of `01_code/02_solvers/`
+(`fixed_ceiling.py` 744 s, `hazard_ceiling.py` 462 s, `hjb_stop.py` 449 s, `ceiling_classes.py`
+411 s on 2026-11-13; each on up to 6 worker processes) and `noise_reversal_frontier.py`
+(9 to 15 min on the same day).
 The two modes write the same `values.tex`, the same `computed.json` and the same tables, byte
 for byte; `run_all.sh` prints its per-step wall clock at the end.
 
@@ -254,14 +260,20 @@ The outputs under `02_output/` are the same in both modes.
 | `01_code/01_calibration/phi_fold.py` | module: the fold amplitude Phi of app:amp | none (self-contained) |
 | `01_code/01_calibration/record_detectability.py` | reads the record-study outputs; the \rec* macros | record-study outputs (02_output/record_study/) |
 | `01_code/01_calibration/reduced_form_scc.py` | the reduced-form price level (diagnostic macros) | AMOC series, via ews_calibration.py |
+| `01_code/02_solvers/ceiling_classes.py` | the fixed ceiling for the three classes of Table 1 (step 54; not yet in the paper) | AMOC series, via ews_calibration.py |
+| `01_code/02_solvers/fixed_ceiling.py` | the planner's best fixed ceiling, order 2 in eps (step 54; not yet in the paper) | AMOC series, via ews_calibration.py |
+| `01_code/02_solvers/hazard_ceiling.py` | the ceiling of a hazard calibrated on the path, and the cost of following it (step 54; not yet in the paper) | AMOC series, via ews_calibration.py |
+| `01_code/02_solvers/hjb_stop.py` | the planner's full control problem for the fold against the fixed ceiling (step 54; not yet in the paper) | AMOC series, via ews_calibration.py |
 | `01_code/02_solvers/moving_budget.py` | the price while the budget is being spent (ssec:window, app:additivity) | AMOC series, via ews_calibration.py |
 | `01_code/02_solvers/noise_reversal_frontier.py` | BVP: where the noise reversal of the theorem (ssec:gen_thm) ends | AMOC series, via ews_calibration.py |
 | `01_code/02_solvers/paper2_all_bifurcations.py` | module: the BVP solvers of the three geometries (imported by validation_bvp.py) | none (self-contained) |
 | `01_code/02_solvers/price.py` | module: the price at fixed state, eq:gen_scc, and its leading law | none (self-contained) |
 | `01_code/02_solvers/validation_bvp.py` | BVP: the numerical validation of app:solver | none (self-contained) |
 | `01_code/03_figures/fig_bifurcation_intro.py` | Figure fig:bifurcation_intro | none (self-contained) |
+| `01_code/03_figures/fig_ceiling_map.py` | the map of the best fixed ceiling over (g, eta*_now) (step 54; not yet in the paper) | fixed_ceiling.py outputs (02_output/planner/), so the AMOC series |
 | `01_code/03_figures/fig_crossover.py` | Figure fig:crossover (imports crossover.py and eps_dyn.py) | AMOC series, via ews_calibration.py |
 | `01_code/03_figures/fig_forest_tc.py` | Figure fig:forest_tc and the deadline macros on the emission paths | RCMIP extract (00_data/emissions/) |
+| `01_code/03_figures/fig_hjb_stop.py` | the stopping curve and the controlled price of the fold (step 54; not yet in the paper) | hjb_stop.py outputs (02_output/planner/), so the AMOC series |
 | `01_code/03_figures/fig_intro_two_boundaries.py` | Figure fig:two_boundaries | none (self-contained) |
 | `01_code/03_figures/fig_record_power.py` | Figure fig:record_power (imports record_detectability.compute()) | record-study outputs (02_output/record_study/) |
 | `01_code/04_tables_values/collect_computed.py` | step 2/5: collects the printed results into computed.json | none (self-contained) |
@@ -289,17 +301,22 @@ The outputs under `02_output/` are the same in both modes.
 | Produced by | Macros | of which [requires network] | Needs |
 |---|---|---|---|
 | `01_code/01_calibration/bhp_bound.py` | 11 | 0 | none (self-contained) |
-| `01_code/01_calibration/calibration_ci.py` | 6 | 0 | none (self-contained) |
+| `01_code/01_calibration/calibration_ci.py` | 7 | 0 | none (self-contained) |
 | `01_code/01_calibration/crossover.py` | 6 | 0 | none (self-contained) |
+| `01_code/01_calibration/eps_dyn.py` | 1 | 0 | none (self-contained) |
 | `01_code/01_calibration/eps_inf_ci.py` | 3 | 0 | none (self-contained) |
 | `01_code/01_calibration/ews_calibration.py` | 5 | 5 | AMOC series |
 | `01_code/01_calibration/record_detectability.py` | 53 | 0 | record-study outputs (02_output/record_study/) |
 | `01_code/01_calibration/reduced_form_scc.py` | 2 | 2 | AMOC series, via ews_calibration.py |
+| `01_code/02_solvers/ceiling_classes.py` | 3 | 3 | AMOC series, via ews_calibration.py |
+| `01_code/02_solvers/fixed_ceiling.py` | 11 | 11 | AMOC series, via ews_calibration.py |
+| `01_code/02_solvers/hazard_ceiling.py` | 9 | 9 | AMOC series, via ews_calibration.py |
+| `01_code/02_solvers/hjb_stop.py` | 5 | 5 | AMOC series, via ews_calibration.py |
 | `01_code/02_solvers/moving_budget.py` | 8 | 8 | AMOC series, via ews_calibration.py |
 | `01_code/02_solvers/noise_reversal_frontier.py` | 2 | 2 | AMOC series, via ews_calibration.py |
 | `01_code/02_solvers/validation_bvp.py` | 30 | 7 | none (self-contained) |
 | `01_code/03_figures/fig_forest_tc.py` | 25 | 0 | RCMIP extract (00_data/emissions/) |
-| `01_code/04_tables_values/collect_computed.py` | 48 | 12 | closed forms and sourced constants |
+| `01_code/04_tables_values/collect_computed.py` | 49 | 12 | closed forms and sourced constants |
 | `01_code/inputs_literature.py` | 43 | 0 | literature constants |
 <!-- END GENERATED MACROS -->
 

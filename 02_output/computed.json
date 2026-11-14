@@ -383,7 +383,17 @@
   },
   "tcAMOCcentral": {
     "value": "156",
-    "source": "closed form: (DT*-DT_0)/TCRE x 1000 / E_0 at central inputs, DT*=4, DT_0=1.2, TCRE=0.45, E_0=40",
+    "source": "eps_dyn.tc_central() — closed form (DT*-DT_0)/TCRE x 1000 / E_0 at central inputs, DT*=4, DT_0=1.2, TCRE=0.45, E_0=40 (155.56 yr); the distance the record study works at (record_pipeline.tc_now, rounded to the year)",
+    "requires_network": false
+  },
+  "tcAMOCmedBudget": {
+    "value": "165",
+    "source": "eps_dyn.tc_med_budget() — eps_now M*_P50/E_0 (165.08 yr), M*_P50 the Monte Carlo median of M* = DT* x 1000/TCRE (calibration_ci.py): the date on the budget moving_budget.py and the planner's scripts solve with",
+    "requires_network": false
+  },
+  "tcAMOCconvGapPct": {
+    "value": "6.1",
+    "source": "eps_dyn.py — (tcAMOCmedBudget/tcAMOCcentral - 1) x 100 at full precision: the median of a ratio against the ratio of the central values",
     "requires_network": false
   },
   "xoverClassFactorAtCentral": {
@@ -393,7 +403,7 @@
   },
   "tcAMOC": {
     "value": "164",
-    "source": "eps_inf_ci.py — deadline bound t_c <= (M*/E0) eps_0 = mu_now/E0 (median calibration, seed=42); free of the backstop cost and of the margin",
+    "source": "eps_inf_ci.py — the MONTE CARLO MEDIAN of the deadline bound mu_now/E0 over the draws (seed=42); not the bound at central inputs (tcAMOCcentral) nor the date on the median budget (tcAMOCmedBudget); free of the backstop cost and of the margin",
     "requires_network": false
   },
   "tcAmazon": {
@@ -1342,6 +1352,186 @@
   "movingErrNowPct": {
     "value": "11",
     "source": "moving_budget.py — the price at fixed state when the budget is spent at E_0, against the frozen price (AMOC, eta*_now in {0.1, 0.25, 0.5, 1}); see the script's tables",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilTauEqMaxInLayer": {
+    "value": "40",
+    "source": "fixed_ceiling.py — largest certainty-equivalent crossing date tau_eq = -ln(phi)/rho (yr) inside the noise layer, eta*_now <= 1, stop today or never (fold, from x*(eps_now)) (computed.json: ceilTauEqMaxInLayer)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilGSwitchEtaOne": {
+    "value": "0.13",
+    "source": "fixed_ceiling.py — g_switch = (phi_A3 - phi_frozen)/(1 - phi_frozen) at eta*_now = 1: below it the best fixed ceiling is 'stop today', above it 'never stop' (computed.json: ceilGSwitchEtaOne)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilEtaCLo": {
+    "value": "0.88",
+    "source": "fixed_ceiling.py — smallest eta*(eps_bar*) = d/(2 l) at the interior fixed ceilings (> 5 yr before t_c, eta*_now >= 1.25, all g in {0.01..0.5}) (computed.json: ceilEtaCLo)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilEtaCHi": {
+    "value": "1.46",
+    "source": "fixed_ceiling.py — largest eta*(eps_bar*) at the interior fixed ceilings (all g) (computed.json: ceilEtaCHi)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilEtaCLoCheap": {
+    "value": "1.15",
+    "source": "fixed_ceiling.py — smallest eta*(eps_bar*) at the interior fixed ceilings with g <= 0.1 (computed.json: ceilEtaCLoCheap)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilEtaCHiCheap": {
+    "value": "1.46",
+    "source": "fixed_ceiling.py — largest eta*(eps_bar*) at the interior fixed ceilings with g <= 0.1 (computed.json: ceilEtaCHiCheap)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilInteriorCount": {
+    "value": "23",
+    "source": "fixed_ceiling.py — number of interior fixed ceilings (> 5 yr before t_c) among eta*_now in {1.25, 1.5, 2, 3, F} x g in {0.01, 0.02, 0.05, 0.1, 0.2, 0.5} (computed.json: ceilInteriorCount)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilYearsBeforeTcFLo": {
+    "value": "7",
+    "source": "fixed_ceiling.py — smallest t_c - t* (yr) of the best fixed ceiling at eta*_now = F, over g (computed.json: ceilYearsBeforeTcFLo)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilYearsBeforeTcFHi": {
+    "value": "14",
+    "source": "fixed_ceiling.py — largest t_c - t* (yr) of the best fixed ceiling at eta*_now = F, over g (computed.json: ceilYearsBeforeTcFHi)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilEpsOverEpsDynFLo": {
+    "value": "1.0",
+    "source": "fixed_ceiling.py — smallest eps_bar*/eps_dyn at eta*_now = F, over g (computed.json: ceilEpsOverEpsDynFLo)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "ceilEpsOverEpsDynFHi": {
+    "value": "2.1",
+    "source": "fixed_ceiling.py — largest eps_bar*/eps_dyn at eta*_now = F, over g (computed.json: ceilEpsOverEpsDynFHi)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hjbGainMaxPct": {
+    "value": "1.49",
+    "source": "hjb_stop.py — largest gain (%) of the full control problem (HJB) over the best fixed ceiling on the same levels (fold, eta*_now in {2, F}, g in {0.02, 0.1, 0.5}), order 2 (computed.json: hjbGainMaxPct)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hjbGainMinPct": {
+    "value": "0.20",
+    "source": "hjb_stop.py — smallest gain (%) of the HJB over the best fixed ceiling, over the interior fixed ceilings (> 5 yr before t_c), order 2 (computed.json: hjbGainMinPct)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hjbStopPriceMatchPct": {
+    "value": "0.26",
+    "source": "hjb_stop.py — largest |P/g - 1| (%), P the controlled price -dc/dM at the stop point of the branch from the emitting side (units of rho L/E_0), against g (computed.json: hjbStopPriceMatchPct)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hjbNEpsLevels": {
+    "value": "8000",
+    "source": "hjb_stop.py — number of geometric eps-levels of the HJB's main grid (1e-9 to 1.12 eps_now; plus 0 and eps_now) (computed.json: hjbNEpsLevels)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hjbOrderGapPosPct": {
+    "value": "0.26",
+    "source": "hjb_stop.py — largest |order 2 / order 1 - 1| (%) of the positions eps_bar* (fixed ceiling) and eps_b (HJB) at the interior fixed ceilings (computed.json: hjbOrderGapPosPct)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hjbGainMaxPctOrderOne": {
+    "value": "1.45",
+    "source": "hjb_stop.py — DIAGNOSTIC (not emitted): hjbGainMaxPct at order 1, the scheme of step 53 (computed.json: hjbGainMaxPctOrderOne)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hjbGainMinPctOrderOne": {
+    "value": "0.20",
+    "source": "hjb_stop.py — DIAGNOSTIC (not emitted): hjbGainMinPct at order 1, the scheme of step 53 (computed.json: hjbGainMinPctOrderOne)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "classPitchEtaStop": {
+    "value": "0.80",
+    "source": "ceiling_classes.py — margin eta*(eps_bar*) at the best fixed ceiling, pitchfork, eta*_now = 2, g = 0.1 (each class recovers today at the measured theta) (computed.json: classPitchEtaStop)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "classTcEtaStop": {
+    "value": "1.23",
+    "source": "ceiling_classes.py — margin eta*(eps_bar*) at the best fixed ceiling, transcritical, eta*_now = 2, g = 0.1 (computed.json: classTcEtaStop)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "classFoldEtaStop": {
+    "value": "1.21",
+    "source": "ceiling_classes.py — margin eta*(eps_bar*) at the best fixed ceiling, fold, eta*_now = 2, g = 0.1 (computed.json: classFoldEtaStop)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hazardCeilGapMaxYears": {
+    "value": "0.7",
+    "source": "hazard_ceiling.py — largest |(t_c - t*)_hazard - (t_c - t*)_true| (yr) over the quasi-static cases (true ceiling interior, > 5 yr before t_c), three classes (computed.json: hazardCeilGapMaxYears)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hazardCeilGapMaxPct": {
+    "value": "3",
+    "source": "hazard_ceiling.py — the same gap relative to (t_c - t*)_true (%) (computed.json: hazardCeilGapMaxPct)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hazardCeilCases": {
+    "value": "11",
+    "source": "hazard_ceiling.py — number of quasi-static cases among 3 classes x eta*_now in {2, F} x g in {0.02, 0.1, 0.5} (computed.json: hazardCeilCases)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hazardMissCases": {
+    "value": "6",
+    "source": "hazard_ceiling.py — number of near-exhaustion cases in which the hazard's ceiling is not within 10% of the true one (computed.json: hazardMissCases)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hazardEarlyLoYears": {
+    "value": "1.5",
+    "source": "hazard_ceiling.py — smallest advance (yr) of the hazard's stop over the true one, missed cases (computed.json: hazardEarlyLoYears)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hazardEarlyHiYears": {
+    "value": "19.5",
+    "source": "hazard_ceiling.py — largest advance (yr) of the hazard's stop over the true one, missed cases (computed.json: hazardEarlyHiYears)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hazardFollowCostQSPct": {
+    "value": "0.09",
+    "source": "hazard_ceiling.py — largest cost (%) of following the hazard's ceiling in the true model, c_true(eps_bar_hazard)/c_true(eps_bar*) - 1, over the quasi-static cases (computed.json: hazardFollowCostQSPct)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hazardFollowCostFoldPct": {
+    "value": "0.06",
+    "source": "hazard_ceiling.py — largest cost (%) of following the hazard's ceiling, over the six fold cases (computed.json: hazardFollowCostFoldPct)",
+    "requires_network": true,
+    "verbatim": true
+  },
+  "hazardFollowCostMaxPct": {
+    "value": "17",
+    "source": "hazard_ceiling.py — largest cost (%) of following the hazard's ceiling, over all cases (transcritical, eta*_now = F, g = 0.5) (computed.json: hazardFollowCostMaxPct)",
     "requires_network": true,
     "verbatim": true
   }

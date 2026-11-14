@@ -100,12 +100,13 @@ REMOVED_MACROS = {
     "valSensFGapPctLo", "valSensFGapPctHi",
     # not reached before 2500 is no longer written; the text says why (zero by 2250):
     "emissionPathLastYear",
+    # Diagnostics of hjb_stop.py (step 54): the HJB gains at order 1, the scheme of step 53. The paper
+    # quotes order 2 only (\hjbGainMaxPct, \hjbGainMinPct); computed.json keeps these two:
+    "hjbGainMaxPctOrderOne", "hjbGainMinPctOrderOne",
     # note 4 now quotes the ice sheet against the Amazon only (\fracWAISbeforeAmazon*):
     "fracWAISfirst", "fracWAISfirstIncl",
     # the ordering paragraph of ssec:comparable quotes the realization factor of the two dated elements:
     "OmegaAMOCmed",
-    # the bound at central inputs; the bound appendix quotes \recNPtcNow instead:
-    "tcAMOCcentral",
     # ssec:comparable no longer names backstop scenarios (the bound does not depend on the cost):
     "gammabarLow", "gammabarHigh",
     # literature inputs with no caller since Howard and Sterner left the body:

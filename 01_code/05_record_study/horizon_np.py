@@ -47,7 +47,7 @@ LAM_MID = pu.LAM_MID_G
 ANCHOR = 73.0                                                # years before record end where lambda = lambda_mid
 NDRAW = 20000
 THETAS = [0.0, 0.5, 0.75, 1.0, 1.25, 1.5]
-TCS = [0.5, 1, 2, 5, 10, 15, 20, 30, 40, 60, 80, 100, 120, 156, 200, 300]
+TCS = [0.5, 1, 2, 5, 10, 15, 20, 30, 40, 60, 80, 100, 120, dr.tc_now(), 200, 300]   # tc_now(): 156
 LS = [100, 146, 200, 292]
 
 
@@ -129,8 +129,9 @@ def main():
                 jobs.append((model, tc, L, seed)); seed += 1
     with Pool(6) as pool:
         out = pool.map(task, jobs, chunksize=1)
-    ctrl = {("lin-1/2", 0.5): (0.873, 0.850), ("lin-1/2", 156): (0.188, 0.139),
-            ("lin-1", 20): (0.966, 0.954), ("lin-1", 156): (0.414, 0.281)}
+    # the reference values at t_c = 156 were computed at that distance, the one tc_now() returns
+    ctrl = {("lin-1/2", 0.5): (0.873, 0.850), ("lin-1/2", dr.tc_now()): (0.188, 0.139),
+            ("lin-1", 20): (0.966, 0.954), ("lin-1", dr.tc_now()): (0.414, 0.281)}
     print("control against the fixed-length computation (L = 146; theta 0 and 1):")
     for (m, tc), (s0, s1) in ctrl.items():
         o = next(o for o in out if o["model"] == m and o["tc"] == tc and o["L"] == 146)

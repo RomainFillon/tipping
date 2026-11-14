@@ -14,3 +14,4 @@ tables/*
 !tables/eps_dyn.tex
 values/raw_runs/
 record_study/
+planner/

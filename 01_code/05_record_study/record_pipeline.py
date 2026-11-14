@@ -48,6 +48,17 @@ from inputs_literature import DERIVATION_INPUTS  # noqa: E402
 rng = np.random.default_rng(42)
 
 
+def tc_now():
+    """The AMOC's distance to its threshold today, in whole years: the deadline bound eq:tc_bound by
+    the closed form at central inputs, (DT* - DT_0)/TCRE x 1000/E_0, read from eps_dyn.tc_central()
+    (the one place it is computed, emitted as tcAMOCcentral) and rounded to the year, the unit of the
+    study (records of whole annual means, a diagonal in whole years). 155.56 -> 156. Never written
+    out in the study's scripts: they all read it here."""
+    sys.path.insert(0, os.path.join(CODE, "01_calibration"))
+    import eps_dyn
+    return int(round(eps_dyn.tc_central()))
+
+
 def out_path(name):
     """Where a study output is written and read: 02_output/record_study/<name>."""
     os.makedirs(OUTDIR, exist_ok=True)
